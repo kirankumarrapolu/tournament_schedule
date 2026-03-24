@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Badminton Tournament Scheduler</title>
+  <style>
+    body {font-family: Arial, sans-serif; margin: 20px; max-width: 980px;}
+    textarea {width: 100%; height: 80px;}
+    table {border-collapse: collapse; width: 100%; margin-top: 16px;}
+    th, td {border: 1px solid #aaa; padding: 8px; text-align: center;}
+    th {background: #f4f4f4;}
+    .match-panel {margin-top: 20px;}
+    .inline {display: inline-block; margin-right: 12px;}
+    button {padding: 8px 14px; margin: 8px 0; cursor: pointer;}
+  </style>
+</head>
+<body>
+  <h1>Badminton Tournament Scheduler</h1>
+  <p>Enter team names one per line (at least 2 teams).</p>
+  <textarea id="teamsInput" placeholder="Ashok and Manisha\nChari and Kiran\nManoj and Rajan"></textarea>
+  <button id="generateBtn">Generate schedule</button>
+  <div id="scheduleContainer"></div>
+  <div id="standingsContainer"></div>
+
+  <script>
+    function combos(arr) {
+      const matches = [];
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+          matches.push([arr[i], arr[j]]);
+        }
+      }
+      return matches;
+    }
+
+    function buildSchedule() {
+      const raw = document.getElementById('teamsInput').value.trim();
+      const teams = raw.split('\n').map(x => x.trim()).filter(x => x);
+      if (teams.length < 2) {
+        alert('Enter at least 2 team names.');
+        return;
+      }
+      const schedule = combos(teams);
+      if (schedule.length === 0) {
+        document.getElementById('scheduleContainer').innerHTML = '<p>No matches to display.</p>';
+        document.getElementById('standingsContainer').innerHTML = '';
+        return;
+      }
+      let html = '<div class="match-panel">';
+      html += '<p><strong>Matches and results (best of 3):</strong></p>';
+      html += '<table><thead><tr><th>#</th><th>Match</th><th>Game 1</th><th>Game 2</th><th>Game 3</th><th>Match Score</th><th>Match Winner</th></tr></thead><tbody>';
+      schedule.forEach((m, idx) => {
+        const [a,b] = m;
+        html += '<tr>';
+        html += `<td>${idx+1}</td>`;
+        html += `<td>${a} vs ${b}</td>`;
+        for (let i=0; i<3; i++) {
+          html += `<td><select class='game-select' data-match='${idx}' data-game='${i}' data-team-a='${a}' data-team-b='${b}'><option value=''>-</option><option value='${a}'>${a}</option><option value='${b}'>${b}</option></select></td>`;
+        }
+        html += `<td class='score' id='score-${idx}'>0 - 0</td>`;
+        html += `<td class='winner' id='winner-${idx}'>-</td>`;
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+      html += '<button id="calcBtn">Recalculate standings</button>';
+      html += '</div>';
+      document.getElementById('scheduleContainer').innerHTML = html;
+      document.getElementById('standingsContainer').innerHTML = '';
+      document.getElementById('calcBtn').addEventListener('click', calcStandings);
+      document.querySelectorAll('.game-select').forEach(select => {
+        select.addEventListener('change', updateMatchRow);
+      });
+    }
+
+    function updateMatchRow() {
+      const selects = Array.from(document.querySelectorAll(`.game-select[data-match='${this.dataset.match}']`));
+      let a = this.dataset.teamA;
+      let b = this.dataset.teamB;
+      let aWins = 0, bWins = 0;
+      selects.forEach((s, si) => {
+        const winner = s.value;
+        if (winner === a) aWins++;
+        if (winner === b) bWins++;
+        if (aWins === 2 || bWins === 2) {
+          // disable remaining selects after match decided
+          selects.slice(si + 1).forEach(s2 => s2.disabled = true);
+        }
+      });
+      document.getElementById(`score-${this.dataset.match}`).textContent = `${aWins} - ${bWins}`;
+      document.getElementById(`winner-${this.dataset.match}`).textContent = aWins > bWins ? a : bWins > aWins ? b : '-';
+    }
+
+    function calcStandings() {
+      const raw = document.getElementById('teamsInput').value.trim();
+      const teams = raw.split('\n').map(x => x.trim()).filter(x => x);
+      const standings = {};
+      teams.forEach(t => {
+        standings[t] = { mw:0, ml:0, gw:0, gl:0 };
+      });
+
+      const matches = document.querySelectorAll('.score');
+      matches.forEach((scoreCell, idx) => {
+        const row = scoreCell.closest('tr');
+        const cells = row.querySelectorAll('td');
+        const matchText = cells[1].textContent;
+        const [a,b] = matchText.split(' vs ').map(x => x.trim());
+
+        const aWins = parseInt(scoreCell.textContent.split(' - ')[0], 10);
+        const bWins = parseInt(scoreCell.textContent.split(' - ')[1], 10);
+        if (isNaN(aWins) || isNaN(bWins)) return;
+        standings[a].gw += aWins;
+        standings[a].gl += bWins;
+        standings[b].gw += bWins;
+        standings[b].gl += aWins;
+
+        if (aWins > bWins) {
+          standings[a].mw++;
+          standings[b].ml++;
+        } else if (bWins > aWins) {
+          standings[b].mw++;
+          standings[a].ml++;
+        }
+      });
+
+      const sorted = Object.entries(standings).sort((a,b) => {
+        const ma = a[1].mw, mb = b[1].mw;
+        if (ma !== mb) return mb - ma;
+        const gda = a[1].gw - a[1].gl;
+        const gdb = b[1].gw - b[1].gl;
+        return gdb - gda;
+      });
+
+      let html = '<h2>Standings</h2>';
+      html += '<table><thead><tr><th>Team</th><th>MW</th><th>ML</th><th>GW</th><th>GL</th><th>GD</th></tr></thead><tbody>';
+      sorted.forEach(([team, st]) => {
+        const gd = st.gw - st.gl;
+        html += `<tr><td>${team}</td><td>${st.mw}</td><td>${st.ml}</td><td>${st.gw}</td><td>${st.gl}</td><td>${gd}</td></tr>`;
+      });
+      html += '</tbody></table>';
+      if (sorted.length > 0) {
+        html += `<p><strong>Champion:</strong> ${sorted[0][0]}</p>`;
+      }
+      document.getElementById('standingsContainer').innerHTML = html;
+    }
+
+    document.getElementById('generateBtn').addEventListener('click', buildSchedule);
+  </script>
+</body>
+</html>
