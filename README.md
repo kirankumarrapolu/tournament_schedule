@@ -1,4 +1,4 @@
-# tournament_schedule-
+# tournament_schedule
 
 Simple 3-team badminton round-robin scheduler (best of 3 games per match).
 
