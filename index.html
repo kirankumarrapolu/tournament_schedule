@@ -4,221 +4,283 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Smash Shuttlers – Badminton Tournament</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --g:#1D9E75;--gd:#0F6E56;--gdd:#085041;--gl:rgba(29,158,117,.13);--gml:#5DCAA5;
-  --amb:#EF9F27;--ambl:rgba(239,159,39,.12);
-  --red:#E24B4A;--redl:rgba(226,75,74,.12);
-  --bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--bg4:#30363d;
-  --bdr:rgba(255,255,255,.08);--bdr2:rgba(255,255,255,.15);--bdr3:rgba(255,255,255,.22);
-  --tx:#e6edf3;--tx2:#8b949e;--tx3:#6e7681;
-  --fd:'Bebas Neue',sans-serif;--fb:'DM Sans',sans-serif;
-  --r:10px;--rl:14px;
+  --lime:#c8f560;--lime2:#a8d940;--lime3:#7cb82f;--lime4:rgba(200,245,96,.08);
+  --g:#1fbc82;--gd:#148a5e;--gml:#5fd4a0;
+  --amb:#f5c842;--ambl:rgba(245,200,66,.12);
+  --red:#e84c4c;--redl:rgba(232,76,76,.12);
+  --bg:#071e14;--bg2:#0c2d1e;--bg3:#112b1e;--bg4:#1a3d2a;
+  --bdr:rgba(200,245,96,.07);--bdr2:rgba(200,245,96,.14);--bdr3:rgba(200,245,96,.26);
+  --tx:#e8f5e0;--tx2:#90b898;--tx3:#4e7a5e;
+  --fd:'Bebas Neue',sans-serif;--fh:'Rajdhani',sans-serif;--fb:'DM Sans',sans-serif;
+  --r:9px;--rl:13px;
 }
 html,body{min-height:100%;background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
-body::before{content:'';position:fixed;inset:0;z-index:0;
-  background-image:linear-gradient(rgba(29,158,117,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(29,158,117,.03) 1px,transparent 1px);
-  background-size:44px 44px;pointer-events:none}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    linear-gradient(rgba(200,245,96,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,245,96,.035) 1px,transparent 1px),
+    linear-gradient(rgba(200,245,96,.015) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,245,96,.015) 1px,transparent 1px);
+  background-size:60px 60px,60px 60px,180px 180px,180px 180px;}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 80% 60% at 50% 50%,transparent 30%,rgba(7,30,20,.55) 100%);}
 .wrap{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
 
 /* ── HEADER ── */
-header{background:rgba(13,17,23,.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr);
-  padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:60}
-.logo{display:flex;align-items:center;gap:11px}
-.logo-icon{width:36px;height:36px;background:var(--g);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px}
-.logo-name{font-family:var(--fd);font-size:24px;letter-spacing:1px}
-.logo-sub{font-size:10px;color:var(--tx2);text-transform:uppercase;letter-spacing:.08em}
-.hbadge{padding:4px 13px;border-radius:20px;font-size:12px;font-weight:500;
-  background:rgba(29,158,117,.18);color:var(--gml);border:1px solid rgba(29,158,117,.3)}
+header{background:linear-gradient(135deg,rgba(10,61,46,.97),rgba(13,79,58,.97));
+  backdrop-filter:blur(20px);border-bottom:2px solid var(--lime3);
+  padding:0 28px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:60;height:62px;}
+.logo{display:flex;align-items:center;gap:13px}
+.logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--lime),var(--lime2));
+  border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;
+  box-shadow:0 2px 14px rgba(200,245,96,.28);}
+.logo-name{font-family:var(--fd);font-size:26px;letter-spacing:2px;color:var(--lime)}
+.logo-sub{font-size:10px;color:var(--tx2);text-transform:uppercase;letter-spacing:.1em;margin-top:1px}
+.hbadge{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;font-family:var(--fh);
+  background:rgba(200,245,96,.12);color:var(--lime);border:1px solid rgba(200,245,96,.28);letter-spacing:.05em;}
 
 /* ── TABS ── */
-.tabbar{display:flex;background:var(--bg2);border-bottom:1px solid var(--bdr);padding:0 28px}
-.tbtn{padding:13px 20px;font-size:13px;font-weight:500;background:none;border:none;cursor:pointer;
-  color:var(--tx2);border-bottom:2px solid transparent;transition:all .15s;font-family:var(--fb)}
-.tbtn:hover{color:var(--tx)}
-.tbtn.active{color:var(--gml);border-bottom-color:var(--g)}
+.tabbar{display:flex;background:linear-gradient(135deg,rgba(10,61,46,.9),rgba(12,45,30,.9));
+  border-bottom:1px solid var(--bdr2);padding:0 28px;}
+.tbtn{padding:13px 22px;font-size:12px;font-weight:700;background:none;border:none;cursor:pointer;
+  color:var(--tx3);border-bottom:2px solid transparent;transition:all .15s;
+  font-family:var(--fh);letter-spacing:.06em;text-transform:uppercase;}
+.tbtn:hover{color:var(--tx2)}
+.tbtn.active{color:var(--lime);border-bottom-color:var(--lime)}
 
 /* ── MAIN ── */
-main{flex:1;padding:26px 28px;max-width:1100px;width:100%;margin:0 auto}
+main{flex:1;padding:24px 28px;max-width:1080px;width:100%;margin:0 auto}
 .sec{display:none;animation:fu .2s ease}
 .sec.active{display:block}
-@keyframes fu{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── CARD ── */
-.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rl);padding:20px 22px;margin-bottom:16px}
-.ctitle{font-family:var(--fd);font-size:17px;letter-spacing:.5px;margin-bottom:14px}
+.card{background:linear-gradient(135deg,rgba(12,45,30,.88),rgba(10,38,24,.88));
+  border:1px solid var(--bdr2);border-radius:var(--rl);padding:20px 22px;margin-bottom:16px;}
+.ctitle{font-family:var(--fh);font-size:18px;letter-spacing:.5px;margin-bottom:14px;color:var(--lime);font-weight:700}
 
 /* ── FORMS ── */
-.flabel{font-size:11px;color:var(--tx2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
-input[type=text],input[type=number]{
-  width:100%;padding:9px 13px;border-radius:var(--r);border:1px solid var(--bdr2);
-  background:var(--bg3);color:var(--tx);font-size:14px;font-family:var(--fb);outline:none;transition:border-color .15s}
-input:focus{border-color:var(--g)}
+.flabel{font-size:11px;color:var(--tx2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;font-family:var(--fh);font-weight:700}
+input[type=text],input[type=number]{width:100%;padding:9px 13px;border-radius:var(--r);
+  border:1px solid var(--bdr2);background:rgba(7,30,20,.8);color:var(--tx);
+  font-size:14px;font-family:var(--fb);outline:none;transition:border-color .15s;}
+input:focus{border-color:var(--lime);box-shadow:0 0 0 2px rgba(200,245,96,.09)}
 input::placeholder{color:var(--tx3)}
 .row{display:flex;gap:11px;align-items:flex-end;margin-bottom:14px}
 .row>div{flex:1}
 
-/* ── FORMAT ── */
-.fmtgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:4px}
-.fopt{border:1px solid var(--bdr2);border-radius:var(--rl);padding:15px 17px;cursor:pointer;transition:all .15s;background:var(--bg3)}
-.fopt:hover{border-color:var(--g)}
-.fopt.sel{border:2px solid var(--g);background:rgba(29,158,117,.08)}
-.fopt h3{font-size:14px;font-weight:600;color:var(--tx);margin-bottom:3px}
-.fopt p{font-size:12px;color:var(--tx2);line-height:1.5}
-.ftag{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;
-  padding:2px 8px;border-radius:20px;margin-bottom:7px;background:rgba(29,158,117,.18);color:var(--gml)}
+/* ── FORMAT GRID ── */
+.fmtgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:4px}
+.fopt{border:1px solid var(--bdr2);border-radius:var(--rl);padding:14px 16px;cursor:pointer;
+  transition:all .15s;background:rgba(7,30,20,.65);position:relative;}
+.fopt:hover{border-color:var(--lime3);background:rgba(10,50,30,.6)}
+.fopt.sel{border:2px solid var(--lime);background:rgba(200,245,96,.07)}
+.fopt h3{font-size:14px;font-weight:700;color:var(--tx);margin-bottom:4px;font-family:var(--fh);letter-spacing:.04em}
+.fopt p{font-size:11px;color:var(--tx2);line-height:1.5}
+.ftag{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;
+  padding:2px 9px;border-radius:20px;margin-bottom:7px;
+  background:rgba(200,245,96,.15);color:var(--lime);font-family:var(--fh);font-weight:700;}
+.fopt .match-preview{margin-top:9px;padding:6px 9px;background:rgba(200,245,96,.05);
+  border-radius:7px;border:1px solid rgba(200,245,96,.1);font-size:11px;color:var(--lime3);
+  font-family:var(--fh);font-weight:600;}
 
 /* ── BUTTONS ── */
-.btn{padding:9px 18px;border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;
-  border:1px solid var(--bdr2);background:var(--bg3);color:var(--tx);transition:all .15s;font-family:var(--fb);white-space:nowrap}
-.btn:hover{background:var(--bg4)}
-.btn-g{background:var(--g);color:#fff;border-color:var(--gd)}
-.btn-g:hover{background:var(--gd)}
+.btn{padding:9px 18px;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;
+  border:1px solid var(--bdr2);background:rgba(17,43,30,.8);color:var(--tx);
+  transition:all .15s;font-family:var(--fh);white-space:nowrap;letter-spacing:.05em;}
+.btn:hover{background:var(--bg4);border-color:var(--bdr3)}
+.btn-lime{background:linear-gradient(135deg,var(--lime2),var(--lime3));color:#071e14;border-color:var(--lime3);font-weight:700}
+.btn-lime:hover{background:linear-gradient(135deg,var(--lime),var(--lime2))}
 .btn-sm{padding:6px 13px;font-size:12px}
 .btn-red{border-color:var(--red);color:var(--red)}
-.btn-red:hover{background:var(--redl);color:var(--red)}
-.btn-icon{padding:5px 9px;font-size:13px}
+.btn-red:hover{background:var(--redl)}
+.btn-icon{padding:5px 9px}
 
 /* ── PAIR LIST ── */
 .plist{display:flex;flex-direction:column;gap:5px;margin:10px 0}
 .pitem{display:flex;align-items:center;justify-content:space-between;
-  padding:9px 13px;background:var(--bg3);border-radius:var(--r);border:1px solid var(--bdr);animation:fu .15s ease}
-.pnum{font-size:11px;color:var(--tx3);font-weight:700;margin-right:8px}
+  padding:9px 13px;background:rgba(7,30,20,.65);border-radius:var(--r);border:1px solid var(--bdr);animation:fu .15s ease;}
+.pnum{font-size:11px;color:var(--lime3);font-weight:700;margin-right:8px;font-family:var(--fh)}
 .dbtn{background:none;border:none;cursor:pointer;color:var(--tx3);font-size:17px;padding:1px 6px;border-radius:5px;transition:all .1s}
 .dbtn:hover{color:var(--red)}
 
 /* ── STATS BAR ── */
 .sbar{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:20px}
-.sbox{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r);padding:13px 15px}
-.snum{font-family:var(--fd);font-size:26px;color:var(--tx)}
-.slbl{font-size:10px;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.sbox{background:linear-gradient(135deg,rgba(12,45,30,.8),rgba(10,38,24,.8));
+  border:1px solid var(--bdr2);border-radius:var(--r);padding:13px 15px;}
+.snum{font-family:var(--fd);font-size:28px;color:var(--lime);line-height:1}
+.slbl{font-size:10px;color:var(--tx3);text-transform:uppercase;letter-spacing:.07em;margin-top:3px;font-family:var(--fh);font-weight:700}
 
 /* ── TABLE ── */
 .tbl-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13px}
-th{padding:9px 12px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.07em;
-  color:var(--tx3);border-bottom:1px solid var(--bdr2);font-weight:600}
+th{padding:9px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.07em;
+  color:var(--tx3);border-bottom:1px solid var(--bdr2);font-weight:700;font-family:var(--fh);}
 td{padding:10px 12px;border-bottom:1px solid var(--bdr);color:var(--tx);vertical-align:middle}
 tr:last-child td{border-bottom:none}
-tr.qualify td{color:var(--gml)}
+tr.qualify td{color:var(--lime)}
 .posbadge{display:inline-flex;align-items:center;justify-content:center;
-  width:22px;height:22px;border-radius:50%;background:var(--bg3);font-size:11px;font-weight:700}
-.posbadge.top{background:rgba(29,158,117,.2);color:var(--gml)}
+  width:22px;height:22px;border-radius:50%;background:var(--bg3);font-size:11px;font-weight:700;font-family:var(--fh);}
+.posbadge.top{background:rgba(200,245,96,.2);color:var(--lime)}
 
 /* ── MATCH ROWS ── */
 .schedule{display:flex;flex-direction:column;gap:8px}
-.mrow{display:flex;align-items:center;gap:10px;padding:11px 14px;
-  background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r);transition:border-color .15s;flex-wrap:wrap}
-.mrow.done{border-color:rgba(29,158,117,.3)}
-.mrow.byerow{opacity:.4}
-.mnum{font-size:10px;color:var(--tx3);font-weight:700;min-width:30px;flex-shrink:0}
-.mteams{flex:1;display:flex;align-items:center;gap:8px;min-width:200px}
+.mrow{display:flex;align-items:center;gap:10px;padding:10px 14px;
+  background:rgba(7,30,20,.65);border:1px solid var(--bdr);border-radius:var(--r);transition:all .15s;}
+.mrow:hover{border-color:var(--bdr2)}
+.mrow.done{border-color:rgba(200,245,96,.18);background:rgba(10,40,25,.75)}
+.mrow.byerow{opacity:.38}
+.mnum{font-size:10px;color:var(--tx3);font-weight:700;min-width:30px;flex-shrink:0;font-family:var(--fh)}
+.mteams{flex:1;display:flex;align-items:center;gap:8px;min-width:0}
 .mteam{flex:1;font-size:13px;font-weight:500;padding:6px 10px;border-radius:7px;
-  cursor:pointer;border:1px solid transparent;transition:all .12s;text-align:center;min-width:80px}
-.mteam:hover:not(.wt):not(.lt):not(.nodrop){background:var(--gl);border-color:rgba(29,158,117,.35);color:var(--gml)}
-.mteam.wt{background:rgba(29,158,117,.12);color:var(--gml);font-weight:700;border-color:rgba(29,158,117,.2)}
+  cursor:pointer;border:1px solid transparent;transition:all .12s;text-align:center;
+  min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.mteam:hover:not(.wt):not(.lt):not(.nd){background:rgba(200,245,96,.07);border-color:rgba(200,245,96,.22);color:var(--lime);}
+.mteam.wt{background:rgba(200,245,96,.1);color:var(--lime);font-weight:700;border-color:rgba(200,245,96,.22)}
 .mteam.lt{color:var(--tx3);text-decoration:line-through}
-.mteam.nodrop{cursor:default}
-.mvs{font-size:11px;color:var(--tx3);flex-shrink:0}
-.mscore{font-size:11px;color:var(--tx2);white-space:nowrap;font-variant-numeric:tabular-nums}
-.mbadge{font-size:10px;padding:3px 10px;border-radius:20px;font-weight:600;white-space:nowrap;flex-shrink:0;cursor:pointer}
-.mb-done{background:rgba(29,158,117,.15);color:var(--gml)}
-.mb-pend{background:var(--ambl);color:var(--amb)}
-.mb-bye{background:var(--bg3);color:var(--tx3);cursor:default}
+.mteam.nd{cursor:default}
+.mvs{font-size:11px;color:var(--tx3);flex-shrink:0;font-family:var(--fh);font-weight:700}
+.mscore{font-size:11px;color:var(--tx2);white-space:nowrap;font-variant-numeric:tabular-nums;flex-shrink:0}
+.mbadge{font-size:10px;padding:3px 10px;border-radius:20px;font-weight:700;
+  white-space:nowrap;flex-shrink:0;cursor:pointer;font-family:var(--fh);letter-spacing:.04em;}
+.mb-done{background:rgba(200,245,96,.1);color:var(--lime);border:1px solid rgba(200,245,96,.18)}
+.mb-pend{background:rgba(245,200,66,.1);color:var(--amb);border:1px solid rgba(245,200,66,.2)}
+.mb-wait{background:rgba(78,122,94,.1);color:var(--tx3);cursor:default;border:1px solid var(--bdr)}
+.mb-bye{background:var(--bg3);color:var(--tx3);cursor:default;border:1px solid var(--bdr)}
 
 /* ── ROUND HEADER ── */
-.rnd-hdr{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--tx3);font-weight:700;
-  margin-bottom:9px;padding-bottom:6px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:8px}
-.rnd-badge{font-size:10px;background:var(--bg3);color:var(--tx2);padding:2px 8px;border-radius:20px;text-transform:none;letter-spacing:0;font-weight:500}
+.rnd-hdr{font-family:var(--fh);font-size:14px;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--lime2);font-weight:700;margin-bottom:9px;padding:8px 13px;
+  background:rgba(200,245,96,.04);border-radius:var(--r);border-left:3px solid var(--lime3);
+  display:flex;align-items:center;justify-content:space-between;}
+.rnd-badge{font-size:10px;background:rgba(200,245,96,.08);color:var(--lime3);
+  padding:2px 9px;border-radius:20px;font-weight:600;}
 
 /* ── FINAL ── */
-.final-wrap{max-width:520px;margin:0 auto}
-.fmatch{display:flex;align-items:stretch;border-radius:var(--rl);overflow:hidden;border:1px solid var(--bdr2)}
-.fteam{flex:1;padding:18px 20px;background:var(--bg2);cursor:pointer;transition:all .15s;text-align:center}
-.fteam:hover:not(.fw):not(.fl){background:var(--gl);color:var(--gml)}
-.fteam.fw{background:rgba(29,158,117,.15);color:var(--gml);font-weight:700}
-.fteam.fl{color:var(--tx3);text-decoration:line-through;background:var(--bg3)}
-.fteam-name{font-size:15px;font-weight:600}
+.final-wrap{max-width:560px;margin:0 auto}
+.fmatch{display:flex;align-items:stretch;border-radius:var(--rl);overflow:hidden;border:1px solid rgba(200,245,96,.22);background:rgba(7,30,20,.6);}
+.fteam{flex:1;padding:20px;cursor:pointer;transition:all .15s;text-align:center}
+.fteam:hover:not(.fw):not(.fl){background:rgba(200,245,96,.06);color:var(--lime)}
+.fteam.fw{background:rgba(200,245,96,.1);color:var(--lime);font-weight:700}
+.fteam.fl{color:var(--tx3);text-decoration:line-through;background:rgba(0,0,0,.15)}
+.fteam-name{font-size:16px;font-weight:700;font-family:var(--fh);letter-spacing:.05em}
 .fteam-sc{font-size:11px;color:var(--tx2);margin-top:4px}
-.fvs{display:flex;align-items:center;justify-content:center;padding:0 14px;
-  font-size:12px;color:var(--tx3);background:var(--bg2);border-left:1px solid var(--bdr);border-right:1px solid var(--bdr)}
+.fvs{display:flex;align-items:center;justify-content:center;padding:0 16px;
+  font-size:13px;color:var(--tx3);font-family:var(--fh);font-weight:700;letter-spacing:.08em;
+  border-left:1px solid var(--bdr2);border-right:1px solid var(--bdr2);}
 
 /* ── CHAMPION ── */
-.champ{background:linear-gradient(135deg,rgba(29,158,117,.18),rgba(29,158,117,.04));
-  border:1px solid rgba(29,158,117,.4);border-radius:var(--rl);padding:26px;text-align:center;margin-bottom:20px;animation:fu .3s ease}
-.champ-t{font-size:36px;margin-bottom:8px}
-.champ-l{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gml);margin-bottom:5px}
-.champ-n{font-family:var(--fd);font-size:30px;letter-spacing:1px}
+.champ{background:linear-gradient(135deg,rgba(200,245,96,.14),rgba(200,245,96,.03));
+  border:1px solid rgba(200,245,96,.32);border-radius:var(--rl);padding:28px;
+  text-align:center;margin-bottom:22px;animation:fu .4s ease;position:relative;overflow:hidden;}
+.champ::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 40% at 50%50%,rgba(200,245,96,.05),transparent);}
+.champ-t{font-size:40px;margin-bottom:8px;position:relative}
+.champ-l{font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--lime3);
+  margin-bottom:6px;font-family:var(--fh);font-weight:700;position:relative}
+.champ-n{font-family:var(--fd);font-size:34px;letter-spacing:2px;color:var(--lime);position:relative}
 
 /* ── SEC HEADER ── */
 .sechdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;gap:12px}
-.sechdr h2{font-family:var(--fd);font-size:26px;letter-spacing:.8px}
+.sechdr h2{font-family:var(--fd);font-size:28px;letter-spacing:1.5px;color:var(--tx)}
 .sechdr p{font-size:12px;color:var(--tx2);margin-top:2px}
 .sechdr-actions{display:flex;gap:8px;flex-shrink:0;align-items:center}
 
 /* ── QUALIFY NOTE ── */
-.qnote{font-size:12px;color:var(--gml);padding:8px 12px;
-  background:rgba(29,158,117,.08);border-radius:var(--r);border:1px solid rgba(29,158,117,.2);margin-bottom:12px}
+.qnote{font-size:12px;color:var(--lime);padding:9px 13px;font-family:var(--fh);font-weight:600;
+  background:rgba(200,245,96,.06);border-radius:var(--r);border:1px solid rgba(200,245,96,.18);margin-bottom:13px;}
 
-/* ── AUTOSAVE TOAST ── */
-.toast{position:fixed;bottom:24px;right:24px;background:var(--bg3);border:1px solid var(--g);
-  color:var(--gml);padding:10px 18px;border-radius:var(--r);font-size:13px;font-weight:500;
-  z-index:300;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
+/* ── INFO BOX ── */
+.infobox{font-size:12px;color:var(--tx2);padding:9px 13px;
+  background:rgba(200,245,96,.03);border-radius:var(--r);border:1px solid var(--bdr);
+  margin-bottom:14px;line-height:1.6;}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:24px;right:24px;
+  background:linear-gradient(135deg,rgba(10,61,46,.97),rgba(13,79,58,.97));
+  border:1px solid var(--lime3);color:var(--lime);padding:10px 18px;border-radius:var(--r);
+  font-size:13px;font-weight:700;z-index:300;opacity:0;transform:translateY(10px);
+  transition:all .3s;pointer-events:none;font-family:var(--fh);letter-spacing:.05em;}
 .toast.show{opacity:1;transform:translateY(0)}
 
 /* ── HISTORY ── */
-.histcard{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rl);margin-bottom:14px;overflow:hidden}
+.histcard{background:linear-gradient(135deg,rgba(12,45,30,.85),rgba(10,38,24,.85));
+  border:1px solid var(--bdr2);border-radius:var(--rl);margin-bottom:14px;overflow:hidden;}
 .histhead{display:flex;align-items:center;justify-content:space-between;
-  padding:13px 18px;background:var(--bg3);border-bottom:1px solid var(--bdr)}
-.histhead-left{flex:1;cursor:pointer;min-width:0}
-.histhead h3{font-family:var(--fd);font-size:17px;letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  padding:13px 18px;background:rgba(200,245,96,.03);border-bottom:1px solid var(--bdr);}
+.histhead-left{flex:1;cursor:pointer;min-width:0;padding-right:10px}
+.histhead h3{font-family:var(--fh);font-size:17px;font-weight:700;letter-spacing:.05em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--tx)}
 .histhead .meta{font-size:11px;color:var(--tx2);margin-top:2px}
 .histhead-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .histbody{padding:14px 18px;display:none}
-.histbody .mrow{background:var(--bg3)}
+.histbody .mrow{background:rgba(7,30,20,.5)}
 .nohist{text-align:center;padding:44px;color:var(--tx3)}
-.nohist .icon{font-size:32px;margin-bottom:8px}
-.hist-champ{font-size:13px;color:var(--gml);font-weight:600;white-space:nowrap}
+.nohist .icon{font-size:34px;margin-bottom:10px}
+.hist-champ{font-size:13px;color:var(--lime);font-weight:700;white-space:nowrap;font-family:var(--fh)}
+
+/* ── SHARE NOTE ── */
+.share-note{font-size:12px;color:var(--tx2);padding:8px 13px;
+  background:rgba(200,245,96,.03);border-radius:var(--r);border:1px solid var(--bdr);
+  margin-bottom:14px;display:flex;align-items:center;gap:8px;line-height:1.5;}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--bdr2),transparent);margin:20px 0}
 
 /* ── MODAL ── */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;
-  align-items:center;justify-content:center;z-index:200;backdrop-filter:blur(5px)}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;
+  align-items:center;justify-content:center;z-index:200;backdrop-filter:blur(6px);}
 .overlay.open{display:flex}
-.modal{background:var(--bg2);border:1px solid var(--bdr3);border-radius:var(--rl);
-  padding:24px;width:400px;max-width:95vw;animation:fu .2s ease}
-.modal h2{font-family:var(--fd);font-size:22px;margin-bottom:3px}
-.msub{font-size:12px;color:var(--tx2);margin-bottom:18px}
-.mmodalteams{display:flex;align-items:center;gap:10px;margin-bottom:18px}
-.mmtn{flex:1;text-align:center;font-size:13px;font-weight:600;background:var(--bg3);
-  border-radius:var(--r);padding:8px 10px;border:1px solid var(--bdr2)}
-.mmvs{font-size:12px;color:var(--tx3);flex-shrink:0}
-.gblock{margin-bottom:14px}
-.gbtitle{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:8px;font-weight:600}
-.sinp{display:flex;align-items:center;gap:10px}
-.sinp input{width:75px;text-align:center;font-size:20px;font-weight:700;padding:10px 8px;flex:0 0 auto}
-.sinp-label{font-size:12px;color:var(--tx2);flex:1;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ssep{font-size:16px;color:var(--tx3);flex-shrink:0}
+.modal{background:linear-gradient(135deg,rgba(12,50,33,.98),rgba(8,32,20,.98));
+  border:1px solid rgba(200,245,96,.28);border-radius:var(--rl);padding:26px;
+  width:420px;max-width:95vw;animation:fu .2s ease;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.modal h2{font-family:var(--fd);font-size:24px;margin-bottom:2px;color:var(--lime);letter-spacing:1px}
+.msub{font-size:12px;color:var(--tx2);margin-bottom:18px;line-height:1.5}
+.mmodalteams{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.mmtn{flex:1;text-align:center;font-size:13px;font-weight:700;
+  background:rgba(7,30,20,.8);border-radius:var(--r);padding:9px 11px;
+  border:1px solid var(--bdr2);color:var(--tx);font-family:var(--fh);letter-spacing:.03em;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.mmvs{font-size:13px;color:var(--tx3);flex-shrink:0;font-family:var(--fh);font-weight:700}
+.gblock{margin-bottom:14px;background:rgba(7,30,20,.5);border-radius:var(--r);
+  padding:12px 14px;border:1px solid var(--bdr);}
+.gbtitle{font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--lime3);margin-bottom:10px;font-weight:700;font-family:var(--fh);}
+.sinp{display:flex;align-items:center;gap:8px}
+.sinp-score{width:70px;text-align:center;font-size:22px;font-weight:700;padding:9px 6px;
+  flex:0 0 auto;border-radius:var(--r);background:rgba(7,30,20,.9);
+  border:1px solid var(--bdr2);color:var(--lime);font-family:var(--fh);}
+.sinp-score:focus{border-color:var(--lime);box-shadow:0 0 0 2px rgba(200,245,96,.1)}
+.sinp-team{font-size:11px;color:var(--tx2);flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ssep{font-size:18px;color:var(--tx3);flex-shrink:0;font-weight:700}
 .mfoot{display:flex;gap:9px;justify-content:flex-end;margin-top:18px}
 
 /* ── EMPTY ── */
 .empty{text-align:center;padding:44px 20px;color:var(--tx3)}
-.empty .icon{font-size:34px;margin-bottom:9px}
-.empty p{font-size:13px;margin-top:5px}
+.empty .icon{font-size:36px;margin-bottom:10px}
+.empty strong{color:var(--tx2);font-family:var(--fh);font-size:16px;letter-spacing:.05em}
+.empty p{font-size:13px;margin-top:6px}
 
-@media(max-width:640px){
+@media(max-width:700px){
   header,main,.tabbar{padding-left:14px;padding-right:14px}
+  header{padding:0 14px}
   .sbar{grid-template-columns:repeat(2,1fr)}
   .fmtgrid{grid-template-columns:1fr}
   .row{flex-direction:column}
-  .mrow{flex-wrap:wrap}
+  .modal{padding:18px}
+  .logo-name{font-size:20px}
 }
 </style>
 </head>
 <body>
 <div class="wrap">
 
+<!-- HEADER -->
 <header>
   <div class="logo">
     <div class="logo-icon">🏸</div>
@@ -227,9 +289,10 @@ tr.qualify td{color:var(--gml)}
       <div class="logo-sub">Badminton Tournament</div>
     </div>
   </div>
-  <span class="hbadge" id="hbadge">No tournament</span>
+  <span class="hbadge" id="hbadge">No Tournament</span>
 </header>
 
+<!-- TABS -->
 <div class="tabbar">
   <button class="tbtn active" onclick="goTab('setup')">⚙ Setup</button>
   <button class="tbtn" onclick="goTab('matches')">🏸 Matches</button>
@@ -242,23 +305,37 @@ tr.qualify td{color:var(--gml)}
 <div id="sec-setup" class="sec active">
   <div class="card">
     <div class="ctitle">Tournament Details</div>
-    <div style="margin-bottom:14px">
+    <div style="margin-bottom:16px">
       <div class="flabel">Tournament Name</div>
-      <input type="text" id="tname" value="Hyderabad Badminton Open 2026"/>
+      <input type="text" id="tname" value="Hyderabad Badminton Open 2025"/>
     </div>
-    <div class="ctitle">Match Format</div>
-    <div class="fmtgrid">
-      <div class="fopt sel" id="fmt-ko" onclick="setFmt('ko')">
+
+    <div class="ctitle">Choose Format</div>
+    <div class="fmtgrid" id="fmtgrid">
+
+      <div class="fopt sel" id="fmt-league" onclick="setFmt('league')">
+        <div class="ftag">League</div>
+        <h3>League Only</h3>
+        <p>Every pair plays every other pair once. Best record wins the title.</p>
+        <div class="match-preview" id="prev-league">— add pairs to see match count</div>
+      </div>
+
+      <div class="fopt" id="fmt-league_ko" onclick="setFmt('league_ko')">
+        <div class="ftag">Most Popular ⭐</div>
+        <h3>League + Knockout Final</h3>
+        <p>All pairs play each other first (Best of 3). Top 2 advance to a knockout Final.</p>
+        <div class="match-preview" id="prev-league_ko">— add pairs to see match count</div>
+      </div>
+
+      <div class="fopt" id="fmt-ko" onclick="setFmt('ko')">
         <div class="ftag">Knockout</div>
-        <h3>Single Elimination</h3>
-        <p>Lose once → eliminated. Bracket advances round by round. One game per match.</p>
+        <h3>Pure Knockout</h3>
+        <p>Bracket style — pairs drawn randomly, lose once = eliminated. Not all teams play each other.</p>
+        <div class="match-preview" id="prev-ko">— add pairs to see match count</div>
       </div>
-      <div class="fopt" id="fmt-rr" onclick="setFmt('rr')">
-        <div class="ftag">Round Robin + Final</div>
-        <h3>Best of 3 (League Style)</h3>
-        <p>Every pair plays every other pair. Top 2 teams by points advance to the Final (Best of 3).</p>
-      </div>
+
     </div>
+    <div id="fmt-hint" style="margin-top:10px;font-size:12px;color:var(--lime3);font-family:var(--fh);font-weight:600"></div>
   </div>
 
   <div class="card">
@@ -266,12 +343,12 @@ tr.qualify td{color:var(--gml)}
     <div class="row">
       <div><div class="flabel">Player 1</div><input type="text" id="p1" placeholder="e.g. Rajan" onkeydown="if(event.key==='Enter')document.getElementById('p2').focus()"/></div>
       <div><div class="flabel">Player 2</div><input type="text" id="p2" placeholder="e.g. Kiran" onkeydown="if(event.key==='Enter')addPair()"/></div>
-      <button class="btn btn-g" onclick="addPair()">+ Add</button>
+      <button class="btn btn-lime" onclick="addPair()">+ Add</button>
     </div>
     <div class="plist" id="plist"></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px">
       <span style="font-size:13px;color:var(--tx2)" id="pcount">0 pairs</span>
-      <button class="btn btn-g" onclick="startTournament()">Start Tournament →</button>
+      <button class="btn btn-lime" onclick="startTournament()">Start Tournament →</button>
     </div>
   </div>
 </div>
@@ -279,16 +356,21 @@ tr.qualify td{color:var(--gml)}
 <!-- ══ MATCHES ══ -->
 <div id="sec-matches" class="sec">
   <div id="matchContent">
-    <div class="empty"><div class="icon">🏸</div><strong>No tournament yet</strong><p>Go to Setup to add pairs and start</p></div>
+    <div class="empty"><div class="icon">🏸</div><strong>No Tournament Yet</strong><p>Go to Setup to add pairs and start</p></div>
   </div>
 </div>
 
 <!-- ══ HISTORY ══ -->
 <div id="sec-results" class="sec">
   <div class="sechdr">
-    <div><h2>Tournament History</h2><p>Results auto-saved after every match · expand to view details</p></div>
-    <button class="btn btn-sm btn-red" onclick="clearAllHistory()">Clear All</button>
+    <div><h2>Tournament History</h2><p>Auto-saved after every match result</p></div>
+    <div class="sechdr-actions">
+      <button class="btn btn-sm" onclick="exportHistory()">📤 Export</button>
+      <button class="btn btn-sm" onclick="showImport()">📥 Import</button>
+      <button class="btn btn-sm btn-red" onclick="clearAllHistory()">🗑 All</button>
+    </div>
   </div>
+  <div class="share-note">💡 Results stay in this browser. Use <strong>Export</strong> to copy a shareable code → paste via <strong>Import</strong> on any device.</div>
   <div id="histContent"></div>
 </div>
 
@@ -298,33 +380,47 @@ tr.qualify td{color:var(--gml)}
 <!-- TOAST -->
 <div class="toast" id="toast">✓ Result saved</div>
 
-<!-- MODAL -->
+<!-- SCORE MODAL -->
 <div class="overlay" id="overlay">
   <div class="modal">
     <h2 id="mTitle">Record Match</h2>
-    <div class="msub" id="mSub">Enter scores</div>
+    <div class="msub" id="mSub"></div>
     <div class="mmodalteams">
       <div class="mmtn" id="mT1">—</div>
-      <div class="mmvs">vs</div>
+      <div class="mmvs">VS</div>
       <div class="mmtn" id="mT2">—</div>
     </div>
     <div id="mBody"></div>
     <div class="mfoot">
       <button class="btn btn-sm" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-g btn-sm" onclick="submitScore()">Save Result ✓</button>
+      <button class="btn btn-lime btn-sm" onclick="submitScore()">Save Result ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMPORT MODAL -->
+<div class="overlay" id="importOverlay">
+  <div class="modal">
+    <h2 style="color:var(--lime)">Import History</h2>
+    <div class="msub">Paste the exported code to load results from another device</div>
+    <textarea id="importTxt" style="width:100%;height:100px;background:rgba(7,30,20,.9);color:var(--tx);border:1px solid var(--bdr2);border-radius:var(--r);padding:10px;font-size:12px;font-family:var(--fb);resize:vertical;outline:none" placeholder="Paste code here..."></textarea>
+    <div class="mfoot">
+      <button class="btn btn-sm" onclick="closeImport()">Cancel</button>
+      <button class="btn btn-lime btn-sm" onclick="doImport()">Import ✓</button>
     </div>
   </div>
 </div>
 
 <script>
-// ══════════════════════════════════════
+// ════════════════════════════════════
 //  STATE
-// ══════════════════════════════════════
-let pairs=[], fmt='ko', activeT=null, currentMid=null, pidx=1;
+// ════════════════════════════════════
+let pairs=[], fmt='league', activeT=null, currentMid=null, pidx=1;
+const STORE='smash_shuttlers_v2';
 
-// ══════════════════════════════════════
+// ════════════════════════════════════
 //  TABS
-// ══════════════════════════════════════
+// ════════════════════════════════════
 function goTab(t){
   ['setup','matches','results'].forEach((id,i)=>{
     document.getElementById('sec-'+id).classList.toggle('active',id===t);
@@ -333,18 +429,47 @@ function goTab(t){
   if(t==='results') renderHistory();
 }
 
-// ══════════════════════════════════════
-//  FORMAT
-// ══════════════════════════════════════
+// ════════════════════════════════════
+//  FORMAT  (league | league_ko | ko)
+// ════════════════════════════════════
 function setFmt(f){
   fmt=f;
-  document.getElementById('fmt-ko').classList.toggle('sel',f==='ko');
-  document.getElementById('fmt-rr').classList.toggle('sel',f==='rr');
+  ['league','league_ko','ko'].forEach(x=>{
+    document.getElementById('fmt-'+x).classList.toggle('sel',x===f);
+  });
+  updateFormatPreviews();
 }
 
-// ══════════════════════════════════════
+function leagueMCount(n){ return n*(n-1)/2; }
+function koBracketMCount(n){
+  // total real (non-bye) matches in KO bracket
+  const sz=nextP2(n);
+  // real matches = pairs count - 1 (every team except champion loses once)
+  return n-1;
+}
+
+function updateFormatPreviews(){
+  const n=pairs.length;
+  const lm=leagueMCount(n);
+  const km=koBracketMCount(n);
+  document.getElementById('prev-league').textContent =
+    n<2?'Add at least 2 pairs':`${lm} match${lm!==1?'es':''} total — every pair plays ${n-1} times`;
+  document.getElementById('prev-league_ko').textContent =
+    n<3?'Add at least 3 pairs':`${lm} league + 1 final = ${lm+1} matches total`;
+  document.getElementById('prev-ko').textContent =
+    n<2?'Add at least 2 pairs':`${km} match${km!==1?'es':''} total — bracket draw, some pairs may not meet`;
+
+  const hints={
+    league:`League: ${n} pairs × each plays ${n-1} opponents = ${lm} total matches`,
+    league_ko:`League + Final: ${lm} league matches, then top 2 play a Final`,
+    ko:`Knockout bracket: ${km} matches, pairs drawn randomly`
+  };
+  document.getElementById('fmt-hint').textContent = n>=2 ? hints[fmt] : '';
+}
+
+// ════════════════════════════════════
 //  PAIRS
-// ══════════════════════════════════════
+// ════════════════════════════════════
 function addPair(){
   const p1=document.getElementById('p1').value.trim();
   const p2=document.getElementById('p2').value.trim();
@@ -354,11 +479,11 @@ function addPair(){
   document.getElementById('p2').value='';
   document.getElementById('p1').focus();
   renderPairs();
+  updateFormatPreviews();
 }
-function removePair(id){pairs=pairs.filter(p=>p.id!==id);renderPairs();}
+function removePair(id){pairs=pairs.filter(p=>p.id!==id);renderPairs();updateFormatPreviews();}
 function renderPairs(){
-  const el=document.getElementById('plist');
-  el.innerHTML=pairs.map((p,i)=>`
+  document.getElementById('plist').innerHTML=pairs.map((p,i)=>`
     <div class="pitem">
       <div><span class="pnum">#${i+1}</span>🏸 ${p.name}</div>
       <button class="dbtn" onclick="removePair(${p.id})">×</button>
@@ -366,504 +491,505 @@ function renderPairs(){
   document.getElementById('pcount').textContent=pairs.length+' pair'+(pairs.length!==1?'s':'')+' registered';
 }
 
-// ══════════════════════════════════════
+// ════════════════════════════════════
 //  START TOURNAMENT
-// ══════════════════════════════════════
+// ════════════════════════════════════
 function startTournament(){
-  if(pairs.length<2){alert('Need at least 2 pairs.');return;}
-  if(fmt==='rr'&&pairs.length<3){alert('Round Robin needs at least 3 pairs.');return;}
+  if(pairs.length<2){alert('Add at least 2 pairs.');return;}
+  if((fmt==='league'||fmt==='league_ko')&&pairs.length<3){
+    alert('League format needs at least 3 pairs.\nFor 2 pairs, use Knockout instead.');return;
+  }
   const name=document.getElementById('tname').value.trim()||'Tournament';
-  activeT = fmt==='ko' ? buildKO(name,[...pairs]) : buildRR(name,[...pairs]);
+  if(fmt==='ko')          activeT=buildKO(name,[...pairs]);
+  else if(fmt==='league') activeT=buildLeague(name,[...pairs],false);
+  else                    activeT=buildLeague(name,[...pairs],true);
   document.getElementById('hbadge').textContent=name;
-  // immediately save to history as "in progress"
   saveHistory(activeT);
   renderMatches();
   goTab('matches');
 }
 
-// ══════════════════════════════════════
-//  KNOCKOUT
-// ══════════════════════════════════════
-function nextP2(n){let p=1;while(p<n)p*=2;return p;}
-
-function buildKO(name,ps){
-  const sh=[...ps].sort(()=>Math.random()-.5);
-  const sz=nextP2(sh.length);
-  while(sh.length<sz)sh.push(null);
-  let mid=0;
-  const rounds=[];
-  // Build round 0
-  let cur=[];
-  for(let i=0;i<sz;i+=2){
-    cur.push({id:'m'+(mid++),t1:sh[i],t2:sh[i+1],winner:null,scores:[],isBye:false,roundIdx:0,phase:'ko'});
-  }
-  rounds.push(cur);
-  // Build subsequent rounds
-  while(cur.length>1){
-    const ri=rounds.length;
-    const nxt=[];
-    for(let i=0;i<cur.length;i+=2){
-      nxt.push({id:'m'+(mid++),t1:null,t2:null,winner:null,scores:[],isBye:false,
-                src:[cur[i].id,cur[i+1].id],roundIdx:ri,phase:'ko'});
-    }
-    rounds.push(nxt);
-    cur=nxt;
-  }
-  const t={type:'ko',name,pairs:ps,rounds,champion:null,done:false,ts:Date.now()};
-  koByes(t);
-  return t;
-}
-
-function findMko(t,id){
-  for(const r of t.rounds) for(const m of r) if(m.id===id) return m;
-  return null;
-}
-
-function koByes(t){
-  let changed=true;
-  while(changed){
-    changed=false;
-    for(const r of t.rounds) for(const m of r){
-      if(m.winner) continue;
-      if(m.src){
-        const m1=findMko(t,m.src[0]),m2=findMko(t,m.src[1]);
-        m.t1=m1?m1.winner:null;
-        m.t2=m2?m2.winner:null;
-      }
-      if(m.t1&&!m.t2){m.winner=m.t1;m.isBye=true;changed=true;}
-      if(m.t2&&!m.t1){m.winner=m.t2;m.isBye=true;changed=true;}
-    }
-  }
-  const fin=t.rounds[t.rounds.length-1][0];
-  if(fin.winner){t.champion=fin.winner;t.done=true;}
-}
-
-function propKO(t){
-  t.rounds.forEach((r,ri)=>{
-    if(ri===0) return;
-    r.forEach(m=>{
-      if(m.src){
-        const m1=findMko(t,m.src[0]),m2=findMko(t,m.src[1]);
-        if(m1&&m1.winner) m.t1=m1.winner;
-        if(m2&&m2.winner) m.t2=m2.winner;
-      }
-    });
-  });
-}
-
-function koRoundName(roundIdx,totalRounds){
-  const fromEnd=totalRounds-1-roundIdx;
-  if(fromEnd===0) return 'Final';
-  if(fromEnd===1) return 'Semi-finals';
-  if(fromEnd===2) return 'Quarter-finals';
-  return 'Round '+(roundIdx+1);
-}
-
-// ══════════════════════════════════════
-//  ROUND ROBIN
-// ══════════════════════════════════════
-function buildRR(name,ps){
+// ════════════════════════════════════
+//  LEAGUE BUILD  (used by both league & league_ko)
+// ════════════════════════════════════
+function buildLeague(name,ps,hasFinal){
   const matches=[];let mid=0;
   for(let i=0;i<ps.length;i++)
     for(let j=i+1;j<ps.length;j++)
       matches.push({id:'m'+(mid++),t1:ps[i],t2:ps[j],winner:null,scores:[],done:false,phase:'rr'});
-  return{type:'rr',name,pairs:ps,matches,
+  return{
+    type:'league',hasFinal,name,pairs:ps,matches,
     standings:ps.map(p=>({...p,w:0,l:0,pts:0,gw:0,gl:0,played:0})),
-    final:null,champion:null,done:false,ts:Date.now()};
+    final:null,champion:null,done:false,ts:Date.now()
+  };
 }
 
 function rebuildStandings(t){
   t.standings=t.pairs.map(p=>({...p,w:0,l:0,pts:0,gw:0,gl:0,played:0}));
-  t.matches.filter(m=>m.done).forEach(m=>{
+  t.matches.filter(m=>m.done&&m.winner).forEach(m=>{
     const wid=m.winner.id, lid=(m.t1.id===wid?m.t2.id:m.t1.id);
     const ws=t.standings.find(s=>s.id===wid);
     const ls=t.standings.find(s=>s.id===lid);
+    const wt1=(m.t1.id===wid);
     if(ws){ws.w++;ws.pts+=3;ws.played++;}
     if(ls){ls.l++;ls.played++;}
-    const wIsT1=m.t1.id===wid;
-    m.scores.forEach(([a,b])=>{
-      if(ws){ws.gw+=(wIsT1?a:b);ws.gl+=(wIsT1?b:a);}
-      if(ls){ls.gw+=(wIsT1?b:a);ls.gl+=(wIsT1?a:b);}
+    (m.scores||[]).forEach(([a,b])=>{
+      if(ws){ws.gw+=(wt1?a:b);ws.gl+=(wt1?b:a);}
+      if(ls){ls.gw+=(wt1?b:a);ls.gl+=(wt1?a:b);}
     });
   });
   t.standings.sort((a,b)=>b.pts-a.pts||(b.gw-b.gl)-(a.gw-a.gl)||b.gw-a.gw);
 }
 
-function checkRRDone(t){
+function checkLeagueDone(t){
   rebuildStandings(t);
-  if(!t.matches.every(m=>m.done)) return;
+  const allDone=t.matches.every(m=>m.done);
+  if(!allDone) return;
+  if(!t.hasFinal){ t.champion=t.standings[0]; t.done=true; return; }
   if(!t.final){
     const top=t.standings.slice(0,2);
     t.final={id:'final',t1:top[0],t2:top[1],winner:null,scores:[],done:false,phase:'final'};
   }
-  if(t.final&&t.final.done){t.champion=t.final.winner;t.done=true;}
+  if(t.final&&t.final.done){ t.champion=t.final.winner; t.done=true; }
 }
 
-// ══════════════════════════════════════
-//  RENDER MATCHES
-// ══════════════════════════════════════
-function scoreDisp(scores,ti){
-  if(!scores||!scores.length) return '';
+// ════════════════════════════════════
+//  KNOCKOUT BUILD
+// ════════════════════════════════════
+function nextP2(n){let p=1;while(p<n)p*=2;return p;}
+
+function buildKO(name,ps){
+  const sh=[...ps].sort(()=>Math.random()-.5);
+  const sz=nextP2(sh.length);
+  while(sh.length<sz) sh.push(null);
+  let mid=0; const rounds=[]; let ri=0;
+  let cur=sh.reduce((acc,_,i)=>{
+    if(i%2===0) acc.push({id:'m'+(mid++),t1:sh[i],t2:sh[i+1]||null,winner:null,scores:[],isBye:false,roundIdx:0,phase:'ko'});
+    return acc;
+  },[]);
+  rounds.push(cur);
+  while(cur.length>1){
+    ri++;
+    const nxt=[];
+    for(let i=0;i<cur.length;i+=2)
+      nxt.push({id:'m'+(mid++),t1:null,t2:null,winner:null,scores:[],isBye:false,src:[cur[i].id,cur[i+1].id],roundIdx:ri,phase:'ko'});
+    rounds.push(nxt); cur=nxt;
+  }
+  const t={type:'ko',name,pairs:ps,rounds,champion:null,done:false,ts:Date.now()};
+  resolveKO(t); return t;
+}
+function findM(t,id){
+  if(t.type==='ko') for(const r of t.rounds) for(const m of r) if(m.id===id) return m;
+  else if(id==='final') return t.final;
+  else return t.matches.find(x=>x.id===id);
+  return null;
+}
+function resolveKO(t){
+  let ch=true;
+  while(ch){ ch=false;
+    for(const r of t.rounds) for(const m of r){
+      if(m.winner) continue;
+      if(m.src){
+        const m1=findM(t,m.src[0]),m2=findM(t,m.src[1]);
+        const w1=m1?m1.winner:null, w2=m2?m2.winner:null;
+        if(m.t1!==w1||m.t2!==w2){m.t1=w1;m.t2=w2;ch=true;}
+      }
+      if(m.t1&&!m.t2){m.winner=m.t1;m.isBye=true;ch=true;}
+      else if(m.t2&&!m.t1){m.winner=m.t2;m.isBye=true;ch=true;}
+    }
+  }
+  const fin=t.rounds[t.rounds.length-1][0];
+  if(fin.winner){t.champion=fin.winner;t.done=true;}
+}
+function koRound(ri,tot){
+  const d=tot-1-ri;
+  if(d===0)return'Final'; if(d===1)return'Semi-finals'; if(d===2)return'Quarter-finals';
+  return'Round '+(ri+1);
+}
+
+// ════════════════════════════════════
+//  RENDER
+// ════════════════════════════════════
+function sdStr(scores,ti){
+  if(!scores||!scores.length)return'';
   return scores.map(g=>`${g[ti]}–${g[1-ti]}`).join(' | ');
 }
-
 function renderMatches(){
   if(!activeT){
     document.getElementById('matchContent').innerHTML=
-      '<div class="empty"><div class="icon">🏸</div><strong>No tournament yet</strong><p>Go to Setup to add pairs and start</p></div>';
+      '<div class="empty"><div class="icon">🏸</div><strong>No Tournament Yet</strong><p>Go to Setup to create one</p></div>';
     return;
   }
-  activeT.type==='ko' ? renderKO(activeT) : renderRR(activeT);
+  activeT.type==='ko' ? renderKO(activeT) : renderLeague(activeT);
 }
 
-/* ── KNOCKOUT RENDER ── */
-function renderKO(t){
-  // count real (non-bye) matches
-  const allMatches=t.rounds.flat();
-  const played=allMatches.filter(m=>m.winner&&!m.isBye).length;
-  const rem=allMatches.filter(m=>!m.winner&&!m.isBye&&m.t1&&m.t2).length;
-  const total=allMatches.filter(m=>!m.isBye&&(m.t1||m.t2)).length;
+/* ── LEAGUE RENDER ── */
+function renderLeague(t){
+  rebuildStandings(t);
+  const played=t.matches.filter(m=>m.done).length;
+  const total=t.matches.length;
+  const allDone=t.matches.every(m=>m.done);
+  const fDone=!!(t.final&&t.final.done);
+  const typeLabel=t.hasFinal?'League + Final':'League Only';
 
   let h=`
   <div class="sechdr">
-    <div><h2>${t.name}</h2><p>Knockout · Single Elimination · ${t.pairs.length} pairs · ${t.rounds.length} rounds</p></div>
-    <div class="sechdr-actions">
-      <button class="btn btn-sm btn-red" onclick="resetT()">Reset</button>
+    <div><h2>${t.name}</h2>
+      <p>${typeLabel} · ${t.pairs.length} pairs · Every pair plays every other pair</p>
     </div>
+    <div class="sechdr-actions"><button class="btn btn-sm btn-red" onclick="resetT()">Reset</button></div>
   </div>
   <div class="sbar">
     <div class="sbox"><div class="snum">${t.pairs.length}</div><div class="slbl">Pairs</div></div>
     <div class="sbox"><div class="snum">${played}/${total}</div><div class="slbl">Matches</div></div>
-    <div class="sbox"><div class="snum">${rem}</div><div class="slbl">Remaining</div></div>
-    <div class="sbox"><div class="snum">${t.rounds.length}</div><div class="slbl">Rounds</div></div>
+    <div class="sbox"><div class="snum">${total-played}</div><div class="slbl">Remaining</div></div>
+    <div class="sbox"><div class="snum">${t.hasFinal?(fDone?'Done':allDone?'Ready':'Pending'):'—'}</div><div class="slbl">Final</div></div>
   </div>`;
 
   if(t.champion)
     h+=`<div class="champ"><div class="champ-t">🏆</div><div class="champ-l">Tournament Champion</div><div class="champ-n">${t.champion.name}</div></div>`;
 
-  // render EVERY round
-  t.rounds.forEach((rnd,ri)=>{
-    const rName=koRoundName(ri,t.rounds.length);
-    const rPlayed=rnd.filter(m=>m.done&&!m.isBye).length;
-    const rTotal=rnd.filter(m=>!m.isBye).length;
-    h+=`<div style="margin-bottom:22px">
-      <div class="rnd-hdr">${rName} <span class="rnd-badge">${rPlayed}/${rTotal} played</span></div>
-      <div class="schedule">`;
-
-    rnd.forEach((m,mi)=>{
-      if(m.isBye){
-        h+=`<div class="mrow byerow">
-          <span class="mnum">—</span>
-          <div class="mteams">
-            <span class="mteam nodrop" style="color:var(--gml)">${m.winner?m.winner.name:'—'}</span>
-            <span class="mvs">→</span>
-            <span class="mteam nodrop" style="color:var(--tx3);font-style:italic">Auto advance (bye)</span>
-          </div>
-          <span class="mbadge mb-bye">BYE</span>
-        </div>`;
-        return;
-      }
-
-      const done=!!m.winner;
-      const w1=done&&m.t1&&m.winner.id===m.t1.id;
-      const w2=done&&m.t2&&m.winner.id===m.t2.id;
-      const canClick=!done&&m.t1&&m.t2;
-      const c1=canClick?`onclick="openModal('${m.id}',0)"`:'';
-      const c2=canClick?`onclick="openModal('${m.id}',1)"`:'';
-      const editClick=done?`onclick="openModal('${m.id}',0)"`:'';
-
-      h+=`<div class="mrow${done?' done':''}">
-        <span class="mnum">M${mi+1}</span>
-        <div class="mteams">
-          <span class="mteam${w1?' wt':done&&m.t1?' lt':!m.t1?' nodrop lt':!canClick?' nodrop':''}" ${c1}>
-            ${m.t1?m.t1.name:'<em style="color:var(--tx3);font-style:italic;font-size:12px">TBD</em>'}
-            ${done&&m.scores.length?`<small style="font-size:10px;display:block;margin-top:2px;opacity:.75">${scoreDisp(m.scores,0)}</small>`:''}
-          </span>
-          <span class="mvs">vs</span>
-          <span class="mteam${w2?' wt':done&&m.t2?' lt':!m.t2?' nodrop lt':!canClick?' nodrop':''}" ${c2}>
-            ${m.t2?m.t2.name:'<em style="color:var(--tx3);font-style:italic;font-size:12px">TBD</em>'}
-            ${done&&m.scores.length?`<small style="font-size:10px;display:block;margin-top:2px;opacity:.75">${scoreDisp(m.scores,1)}</small>`:''}
-          </span>
-        </div>
-        <span class="mbadge ${done?'mb-done':canClick?'mb-pend':'mb-bye'}" ${editClick} title="${done?'Click to edit result':''}">
-          ${done?'Done ✏':canClick?'Pending':'Waiting'}
-        </span>
-      </div>`;
-    });
-    h+=`</div></div>`;
-  });
-
-  document.getElementById('matchContent').innerHTML=h;
-}
-
-/* ── ROUND ROBIN RENDER ── */
-function renderRR(t){
-  rebuildStandings(t);
-  const played=t.matches.filter(m=>m.done).length;
-  const total=t.matches.length;
-  const rrDone=t.matches.every(m=>m.done);
-  const fDone=t.final&&t.final.done;
-
-  let h=`
-  <div class="sechdr">
-    <div><h2>${t.name}</h2><p>Best of 3 · Round Robin + Final · ${t.pairs.length} pairs</p></div>
-    <div class="sechdr-actions">
-      <button class="btn btn-sm btn-red" onclick="resetT()">Reset</button>
-    </div>
-  </div>
-  <div class="sbar">
-    <div class="sbox"><div class="snum">${t.pairs.length}</div><div class="slbl">Pairs</div></div>
-    <div class="sbox"><div class="snum">${played}/${total}</div><div class="slbl">RR Matches</div></div>
-    <div class="sbox"><div class="snum">${fDone?'Done':rrDone?'Ready':'Pending'}</div><div class="slbl">Final</div></div>
-    <div class="sbox"><div class="snum">${total+1}</div><div class="slbl">Total Matches</div></div>
-  </div>`;
-
-  if(t.champion)
-    h+=`<div class="champ"><div class="champ-t">🏆</div><div class="champ-l">Tournament Champion</div><div class="champ-n">${t.champion.name}</div></div>`;
-
-  // standings
+  // Standings
   h+=`<div class="card"><div class="ctitle">Standings</div>`;
-  if(rrDone&&!fDone) h+=`<div class="qnote">★ Top 2 teams qualify for the Final — scroll down to record it</div>`;
+  if(allDone&&t.hasFinal&&!fDone)
+    h+=`<div class="qnote">★ All league matches done — Top 2 qualify for the Final below!</div>`;
   h+=`<div class="tbl-wrap"><table>
     <tr><th>#</th><th>Pair</th><th>Played</th><th>W</th><th>L</th><th>Pts</th><th>Games W–L</th></tr>`;
   t.standings.forEach((s,i)=>{
-    const q=i<2&&rrDone;
-    h+=`<tr${q?' class="qualify"':''}>
-      <td><span class="posbadge${q?' top':''}">${i+1}</span></td>
-      <td style="font-weight:${q?'600':'400'}">${s.name}${q?` <small style="font-size:10px;color:var(--gml)">★</small>`:''}  </td>
+    const q=i<2&&allDone&&t.hasFinal;
+    const isLeader=i===0&&!t.hasFinal&&allDone;
+    h+=`<tr${q||isLeader?' class="qualify"':''}>
+      <td><span class="posbadge${q||isLeader?' top':''}">${i+1}</span></td>
+      <td style="font-weight:${q||isLeader?'700':'400'}">${s.name}
+        ${q?`<small style="color:var(--lime3);margin-left:4px">★ Final</small>`:''}
+        ${isLeader?`<small style="color:var(--lime3);margin-left:4px">🏆 Champion</small>`:''}
+      </td>
       <td>${s.played}</td><td>${s.w}</td><td>${s.l}</td>
-      <td style="font-weight:700;color:var(--gml)">${s.pts}</td>
+      <td style="font-weight:700;color:var(--lime)">${s.pts}</td>
       <td>${s.gw}–${s.gl}</td>
     </tr>`;
   });
   h+=`</table></div></div>`;
 
-  // RR matches - ONE AT A TIME - can record and edit individually
+  // All league matches — click any to record/edit individually
   h+=`<div class="card">
-    <div class="ctitle">Round Robin Matches
-      <small style="font-size:12px;font-weight:400;color:var(--tx2);font-family:var(--fb)"> — click team name to record · click Done ✏ to edit</small>
+    <div class="ctitle">All ${total} Matches
+      <small style="font-size:11px;color:var(--tx2);font-family:var(--fb);text-transform:none;letter-spacing:0;font-weight:400;margin-left:6px">
+        — click any team or badge to record / edit that match
+      </small>
     </div>
     <div class="schedule">`;
   t.matches.forEach((m,mi)=>{
     const done=m.done;
     const w1=done&&m.winner&&m.winner.id===m.t1.id;
     const w2=done&&m.winner&&m.winner.id===m.t2.id;
-    const sc=done?m.scores.map(g=>`${g[0]}–${g[1]}`).join(' | '):'';
-    const c1=`onclick="openModal('${m.id}',0)"`;
-    const c2=`onclick="openModal('${m.id}',1)"`;
-    const editC=done?`onclick="openModal('${m.id}',0)"`:c1;
+    const sc=done?(m.scores||[]).map(g=>`${g[0]}–${g[1]}`).join(' | '):'';
     h+=`<div class="mrow${done?' done':''}">
       <span class="mnum">M${mi+1}</span>
       <div class="mteams">
-        <span class="mteam${w1?' wt':done?' lt':''}" ${c1}>${m.t1.name}</span>
-        <span class="mvs">vs</span>
-        <span class="mteam${w2?' wt':done?' lt':''}" ${c2}>${m.t2.name}</span>
+        <span class="mteam${w1?' wt':done?' lt':''}" onclick="openModal('${m.id}',0)">${m.t1.name}</span>
+        <span class="mvs">VS</span>
+        <span class="mteam${w2?' wt':done?' lt':''}" onclick="openModal('${m.id}',1)">${m.t2.name}</span>
       </div>
       ${sc?`<span class="mscore">${sc}</span>`:''}
-      <span class="mbadge ${done?'mb-done':'mb-pend'}" ${editC} title="${done?'Edit result':'Record result'}">
+      <span class="mbadge ${done?'mb-done':'mb-pend'}" onclick="openModal('${m.id}',0)">
         ${done?'Done ✏':'Pending'}
       </span>
     </div>`;
   });
   h+=`</div></div>`;
 
-  // FINAL
-  if(rrDone){
-    h+=`<div style="margin-top:6px"><div style="font-family:var(--fd);font-size:22px;letter-spacing:.5px;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--bdr)">🏆 The Final — Best of 3</div>`;
-    if(t.final){
-      const f=t.final;
-      const fw1=f.done&&f.winner&&f.winner.id===f.t1.id;
-      const fw2=f.done&&f.winner&&f.winner.id===f.t2.id;
-      const fsc=f.done?f.scores.map(g=>`${g[0]}–${g[1]}`).join(' | '):'';
-      h+=`<div class="final-wrap">
-        <div class="fmatch">
-          <div class="fteam${fw1?' fw':f.done?' fl':''}" onclick="openModal('final',0)">
-            <div class="fteam-name">${f.t1.name}</div>
-            <div class="fteam-sc">${fw1?fsc:f.done?'—':'Click to record'}</div>
-          </div>
-          <div class="fvs">VS</div>
-          <div class="fteam${fw2?' fw':f.done?' fl':''}" onclick="openModal('final',1)">
-            <div class="fteam-name">${f.t2.name}</div>
-            <div class="fteam-sc">${fw2?fsc:f.done?'—':'Click to record'}</div>
-          </div>
+  // Final (League+Ko mode only, after all RR done)
+  if(t.hasFinal&&allDone&&t.final){
+    const f=t.final;
+    const fw1=f.done&&f.winner&&f.winner.id===f.t1.id;
+    const fw2=f.done&&f.winner&&f.winner.id===f.t2.id;
+    const fsc=f.done?(f.scores||[]).map(g=>`${g[0]}–${g[1]}`).join(' | '):'';
+    h+=`<div class="divider"></div>
+    <div style="font-family:var(--fd);font-size:24px;letter-spacing:1px;margin-bottom:14px;color:var(--lime)">🏆 THE FINAL — Best of 3</div>
+    <div class="final-wrap">
+      <div class="fmatch">
+        <div class="fteam${fw1?' fw':f.done?' fl':''}" onclick="openModal('final',0)">
+          <div class="fteam-name">${f.t1.name}</div>
+          <div class="fteam-sc">${f.done?fsc:'Click to record result'}</div>
         </div>
-        <p style="text-align:center;font-size:12px;color:var(--tx2);margin-top:10px">
-          ${f.done?'Click either team to edit the Final result':'Click a team to record the Final result'}
-        </p>
-      </div>`;
-    }
-    h+=`</div>`;
+        <div class="fvs">VS</div>
+        <div class="fteam${fw2?' fw':f.done?' fl':''}" onclick="openModal('final',1)">
+          <div class="fteam-name">${f.t2.name}</div>
+          <div class="fteam-sc">${f.done?fsc:'Click to record result'}</div>
+        </div>
+      </div>
+      <p style="text-align:center;font-size:12px;color:var(--tx2);margin-top:10px">
+        ${f.done?'Click either team to edit the Final result':'Click a team name to record the Final'}
+      </p>
+    </div>`;
   }
 
   document.getElementById('matchContent').innerHTML=h;
 }
 
-// ══════════════════════════════════════
+/* ── KNOCKOUT RENDER ── */
+function renderKO(t){
+  const allM=t.rounds.flat();
+  const realM=allM.filter(m=>!m.isBye);
+  const played=realM.filter(m=>m.winner).length;
+
+  let h=`
+  <div class="sechdr">
+    <div><h2>${t.name}</h2>
+      <p>Pure Knockout · Bracket draw · ${t.pairs.length} pairs · ${t.rounds.length} rounds</p>
+    </div>
+    <div class="sechdr-actions">
+      <button class="btn btn-sm btn-red" onclick="resetT()">Reset</button>
+    </div>
+  </div>
+  <div class="infobox">
+    ℹ️ <strong>Knockout format:</strong> Pairs are drawn randomly into a bracket. Each match, the loser is eliminated. 
+    Not all teams will play each other — only the bracket path determines opponents. 
+    If you want every pair to play everyone, go back to <strong>Setup → League format</strong>.
+  </div>
+  <div class="sbar">
+    <div class="sbox"><div class="snum">${t.pairs.length}</div><div class="slbl">Pairs</div></div>
+    <div class="sbox"><div class="snum">${played}/${realM.length}</div><div class="slbl">Played</div></div>
+    <div class="sbox"><div class="snum">${realM.length-played}</div><div class="slbl">Remaining</div></div>
+    <div class="sbox"><div class="snum">${t.rounds.length}</div><div class="slbl">Rounds</div></div>
+  </div>`;
+
+  if(t.champion)
+    h+=`<div class="champ"><div class="champ-t">🏆</div><div class="champ-l">Tournament Champion</div><div class="champ-n">${t.champion.name}</div></div>`;
+
+  t.rounds.forEach((rnd,ri)=>{
+    const rName=koRound(ri,t.rounds.length);
+    const rReal=rnd.filter(m=>!m.isBye);
+    const rPlayed=rReal.filter(m=>m.winner).length;
+    h+=`<div style="margin-bottom:22px">
+      <div class="rnd-hdr"><span>${rName}</span><span class="rnd-badge">${rPlayed}/${rReal.length} played</span></div>
+      <div class="schedule">`;
+    rnd.forEach((m,mi)=>{
+      if(m.isBye){
+        h+=`<div class="mrow byerow">
+          <span class="mnum">—</span>
+          <div class="mteams">
+            <span class="mteam nd" style="color:var(--gml);text-align:left">${m.winner?m.winner.name:'—'}</span>
+            <span class="mvs">→</span>
+            <span class="mteam nd" style="color:var(--tx3);font-style:italic;font-size:12px">Auto advance (bye)</span>
+          </div>
+          <span class="mbadge mb-bye">BYE</span>
+        </div>`;
+        return;
+      }
+      const done=!!m.winner;
+      const w1=done&&m.t1&&m.winner.id===m.t1.id;
+      const w2=done&&m.t2&&m.winner.id===m.t2.id;
+      const canClick=!done&&m.t1&&m.t2;
+      const sc1=done?sdStr(m.scores,0):'';
+      const sc2=done?sdStr(m.scores,1):'';
+      h+=`<div class="mrow${done?' done':''}">
+        <span class="mnum">M${mi+1}</span>
+        <div class="mteams">
+          <span class="mteam${w1?' wt':done&&m.t1?' lt':(!m.t1||(!canClick&&!done))?' nd':''}"
+            ${canClick||done?`onclick="openModal('${m.id}',0)"`:''}>
+            ${m.t1?m.t1.name:'<em style="font-style:italic;font-size:12px;color:var(--tx3)">TBD</em>'}
+            ${sc1?`<small style="display:block;font-size:10px;opacity:.75;margin-top:1px">${sc1}</small>`:''}
+          </span>
+          <span class="mvs">VS</span>
+          <span class="mteam${w2?' wt':done&&m.t2?' lt':(!m.t2||(!canClick&&!done))?' nd':''}"
+            ${canClick||done?`onclick="openModal('${m.id}',1)"`:''}>
+            ${m.t2?m.t2.name:'<em style="font-style:italic;font-size:12px;color:var(--tx3)">TBD</em>'}
+            ${sc2?`<small style="display:block;font-size:10px;opacity:.75;margin-top:1px">${sc2}</small>`:''}
+          </span>
+        </div>
+        <span class="mbadge ${done?'mb-done':canClick?'mb-pend':'mb-wait'}"
+          ${done||canClick?`onclick="openModal('${m.id}',0)"`:''}>
+          ${done?'Done ✏':canClick?'Pending':'Waiting'}
+        </span>
+      </div>`;
+    });
+    h+=`</div></div>`;
+  });
+  document.getElementById('matchContent').innerHTML=h;
+}
+
+// ════════════════════════════════════
 //  MODAL
-// ══════════════════════════════════════
+// ════════════════════════════════════
 function openModal(mid,hint){
   const t=activeT; if(!t) return;
   const isFinal=mid==='final';
-  const m=isFinal ? t.final : (t.type==='ko' ? findMko(t,mid) : t.matches.find(x=>x.id===mid));
+  const m=isFinal?t.final:(t.type==='ko'?findM(t,mid):t.matches.find(x=>x.id===mid));
   if(!m) return;
   currentMid=mid;
 
-  const isBo3=(t.type==='rr'||isFinal);
+  // KO is always single game. League/Final is always Best of 3
+  const isBo3=(t.type==='league'||isFinal);
   document.getElementById('mTitle').textContent=isFinal?'Record Final':'Record Match';
   document.getElementById('mSub').textContent=isBo3
-    ?'Best of 3 — win 2 games to win. Leave Game 3 as 0–0 if not needed.'
-    :'Single game — enter the final score and click Save.';
+    ?'Best of 3 — play until one team wins 2 games (first to 21 pts each). Leave unplayed games as 0–0.'
+    :'Single game score — enter final score and save.';
   document.getElementById('mT1').textContent=m.t1?m.t1.name:'—';
   document.getElementById('mT2').textContent=m.t2?m.t2.name:'—';
 
+  const t1n=m.t1?m.t1.name:'—', t2n=m.t2?m.t2.name:'—';
+  const prev=m.done&&m.scores&&m.scores.length?m.scores:[];
   let body='';
+
   if(!isBo3){
-    // knockout: single game score
-    const prev=m.done&&m.scores[0]?m.scores[0]:[21,0];
+    const p=prev[0]||[0,0];
     body=`<div class="gblock">
       <div class="gbtitle">Game Score</div>
       <div class="sinp">
-        <span class="sinp-label">${m.t1?m.t1.name:'—'}</span>
-        <input type="number" id="s0a" min="0" max="99" value="${prev[0]}"/>
+        <span class="sinp-team">${t1n}</span>
+        <input class="sinp-score" type="number" id="s0a" min="0" max="99" value="${p[0]}"/>
         <span class="ssep">—</span>
-        <input type="number" id="s0b" min="0" max="99" value="${prev[1]}"/>
-        <span class="sinp-label" style="text-align:left">${m.t2?m.t2.name:'—'}</span>
+        <input class="sinp-score" type="number" id="s0b" min="0" max="99" value="${p[1]}"/>
+        <span class="sinp-team">${t2n}</span>
       </div>
     </div>`;
   } else {
-    // best of 3
-    [0,1,2].forEach(g=>{
-      const prev=m.done&&m.scores[g]?m.scores[g]:[g<2?21:0,0];
+    for(let g=0;g<3;g++){
+      const p=prev[g]||[0,0];
       body+=`<div class="gblock">
-        <div class="gbtitle">Game ${g+1}${g===2?' <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--tx3)">(if needed — leave 0–0 to skip)</span>':''}</div>
+        <div class="gbtitle">Game ${g+1}${g===2?
+          ' <span style="color:var(--tx3);font-weight:400;text-transform:none;letter-spacing:0;font-family:var(--fb);font-size:11px">(if needed — leave 0–0 to skip)</span>':''}</div>
         <div class="sinp">
-          <span class="sinp-label">${m.t1?m.t1.name:'—'}</span>
-          <input type="number" id="s${g}a" min="0" max="99" value="${prev[0]}"/>
+          <span class="sinp-team">${t1n}</span>
+          <input class="sinp-score" type="number" id="s${g}a" min="0" max="99" value="${p[0]}"/>
           <span class="ssep">—</span>
-          <input type="number" id="s${g}b" min="0" max="99" value="${prev[1]}"/>
-          <span class="sinp-label" style="text-align:left">${m.t2?m.t2.name:'—'}</span>
+          <input class="sinp-score" type="number" id="s${g}b" min="0" max="99" value="${p[1]}"/>
+          <span class="sinp-team">${t2n}</span>
         </div>
       </div>`;
-    });
+    }
   }
   document.getElementById('mBody').innerHTML=body;
   document.getElementById('overlay').classList.add('open');
 }
+function closeModal(){document.getElementById('overlay').classList.remove('open');currentMid=null;}
 
-function closeModal(){
-  document.getElementById('overlay').classList.remove('open');
-  currentMid=null;
-}
-
+// ════════════════════════════════════
+//  SUBMIT SCORE
+// ════════════════════════════════════
 function submitScore(){
   if(!currentMid) return;
   const t=activeT;
   const isFinal=currentMid==='final';
-  const m=isFinal ? t.final : (t.type==='ko' ? findMko(t,currentMid) : t.matches.find(x=>x.id===currentMid));
+  const m=isFinal?t.final:(t.type==='ko'?findM(t,currentMid):t.matches.find(x=>x.id===currentMid));
   if(!m) return;
 
-  const isBo3=(t.type==='rr'||isFinal);
+  const isBo3=(t.type==='league'||isFinal);
   let scores=[],w0=0,w1=0;
 
   if(!isBo3){
-    const a=+document.getElementById('s0a').value,b=+document.getElementById('s0b').value;
-    if(a===b){alert('Scores cannot be equal — someone must win!');return;}
-    scores.push([a,b]);
-    if(a>b)w0++;else w1++;
+    // KO single game
+    const a=+document.getElementById('s0a').value, b=+document.getElementById('s0b').value;
+    if(a===b){alert('Scores cannot be equal!');return;}
+    scores.push([a,b]); if(a>b)w0++;else w1++;
   } else {
+    // Best of 3 — allow saving after 2 games if winner is clear
     for(let g=0;g<3;g++){
-      if(w0>=2||w1>=2) break;
-      const a=+document.getElementById('s'+g+'a').value,b=+document.getElementById('s'+g+'b').value;
-      if(a===0&&b===0) continue;
-      if(a===b){alert('Game '+(g+1)+' scores cannot be equal!');return;}
-      scores.push([a,b]);
-      if(a>b)w0++;else w1++;
+      if(w0>=2||w1>=2) break; // already have a winner, stop
+      const a=+document.getElementById('s'+g+'a').value;
+      const b=+document.getElementById('s'+g+'b').value;
+      if(a===0&&b===0){
+        // Game 1 must have score
+        if(g===0){alert('Game 1 must have a score (cannot be 0–0).');return;}
+        // Games 2 & 3 can be 0–0 only if winner already decided
+        if(g===1&&w0<2&&w1<2){alert('Game 2 cannot be 0–0 — the match result isn\'t decided yet. Enter Game 2 scores.');return;}
+        continue; // game 3 skip is fine if someone already won 2
+      }
+      if(a===b){alert('Game '+(g+1)+' cannot be equal!');return;}
+      scores.push([a,b]); if(a>b)w0++;else w1++;
     }
-    if(w0<2&&w1<2){alert('A winner needs 2 game wins. Enter scores for more games.');return;}
+    if(w0<2&&w1<2){alert('No winner yet — make sure one team wins 2 games total.');return;}
   }
 
   const winner=w0>w1?m.t1:m.t2;
   m.winner=winner; m.scores=scores; m.done=true;
 
-  if(isFinal){
-    t.champion=winner; t.done=true;
-  } else if(t.type==='ko'){
-    propKO(t); koByes(t);
-  } else {
-    checkRRDone(t);
-  }
+  if(isFinal){ t.champion=winner; t.done=true; }
+  else if(t.type==='ko'){ resolveKO(t); }
+  else { checkLeagueDone(t); }
 
-  // ★ Save after EVERY single match result
   saveHistory(t);
   showToast('✓ Result saved');
-
-  closeModal();
-  renderMatches();
+  closeModal(); renderMatches();
 }
 
-// ══════════════════════════════════════
+// ════════════════════════════════════
 //  TOAST
-// ══════════════════════════════════════
-let toastTimer=null;
+// ════════════════════════════════════
+let tTmr=null;
 function showToast(msg){
   const el=document.getElementById('toast');
-  el.textContent=msg;
-  el.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>el.classList.remove('show'),2200);
+  el.textContent=msg; el.classList.add('show');
+  clearTimeout(tTmr); tTmr=setTimeout(()=>el.classList.remove('show'),2500);
 }
 
-// ══════════════════════════════════════
-//  HISTORY  (localStorage, per-match save)
-// ══════════════════════════════════════
+// ════════════════════════════════════
+//  STORAGE
+// ════════════════════════════════════
 function saveHistory(t){
-  let hist=loadHist();
+  let h=loadHist();
   const snap=JSON.parse(JSON.stringify(t));
-  const idx=hist.findIndex(h=>h.ts===t.ts);
-  if(idx>=0) hist[idx]=snap; else hist.unshift(snap);
-  try{ localStorage.setItem('smashbracket_v3',JSON.stringify(hist)); }
-  catch(e){ console.warn('Storage full',e); }
+  const idx=h.findIndex(x=>x.ts===t.ts);
+  if(idx>=0)h[idx]=snap;else h.unshift(snap);
+  try{localStorage.setItem(STORE,JSON.stringify(h));}catch(e){console.warn(e);}
 }
 function loadHist(){
-  try{ return JSON.parse(localStorage.getItem('smashbracket_v3')||'[]'); }
-  catch{ return []; }
+  try{return JSON.parse(localStorage.getItem(STORE)||'[]');}catch{return[];}
 }
-
 function deleteOneHistory(ts){
-  if(!confirm('Delete this tournament from history?')) return;
-  let hist=loadHist().filter(h=>h.ts!==ts);
-  localStorage.setItem('smashbracket_v3',JSON.stringify(hist));
+  if(!confirm('Delete this tournament?'))return;
+  localStorage.setItem(STORE,JSON.stringify(loadHist().filter(h=>h.ts!==ts)));
   renderHistory();
 }
 function clearAllHistory(){
-  if(!confirm('Delete ALL saved tournament history? This cannot be undone.')) return;
-  localStorage.removeItem('smashbracket_v3');
-  renderHistory();
+  if(!confirm('Delete ALL history? Cannot be undone.'))return;
+  localStorage.removeItem(STORE); renderHistory();
+}
+function exportHistory(){
+  const h=loadHist();
+  if(!h.length){alert('No history to export.');return;}
+  const str=btoa(unescape(encodeURIComponent(JSON.stringify(h))));
+  navigator.clipboard.writeText(str).then(()=>showToast('📤 Copied! Share this code.')).catch(()=>prompt('Copy this export code:',str));
+}
+function showImport(){document.getElementById('importTxt').value='';document.getElementById('importOverlay').classList.add('open');}
+function closeImport(){document.getElementById('importOverlay').classList.remove('open');}
+function doImport(){
+  const raw=document.getElementById('importTxt').value.trim();
+  if(!raw){alert('Paste a code first.');return;}
+  try{
+    const data=JSON.parse(decodeURIComponent(escape(atob(raw))));
+    if(!Array.isArray(data))throw new Error();
+    let h=loadHist(); let added=0;
+    data.forEach(d=>{if(!h.find(x=>x.ts===d.ts)){h.unshift(d);added++;}});
+    localStorage.setItem(STORE,JSON.stringify(h));
+    closeImport(); renderHistory(); showToast('📥 Imported '+added+' tournament(s)');
+  }catch{alert('Invalid code.');}
 }
 
+// ════════════════════════════════════
+//  HISTORY RENDER
+// ════════════════════════════════════
 function renderHistory(){
   const hist=loadHist();
   const el=document.getElementById('histContent');
   if(!hist.length){
-    el.innerHTML='<div class="nohist"><div class="icon">📋</div><p>No saved tournaments yet.<br>Results are saved automatically after every match.</p></div>';
+    el.innerHTML='<div class="nohist"><div class="icon">🏸</div><p>No saved tournaments yet.<br>Results auto-save after every match.</p></div>';
     return;
   }
-
   el.innerHTML=hist.map((t,i)=>{
     const date=new Date(t.ts).toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
     const champ=t.champion?'🏆 '+t.champion.name:'In Progress';
-    const fmtLabel=t.type==='ko'?'Knockout':'Best of 3 (RR + Final)';
+    const fmtLabel=t.type==='ko'?'Knockout':t.hasFinal?'League + Final':'League Only';
 
-    // collect all played matches
     let matchList=[];
     if(t.type==='ko'){
-      t.rounds.forEach((rnd,ri)=>{
-        rnd.filter(m=>m.done&&!m.isBye).forEach(m=>{
-          matchList.push({...m, phaseLbl: koRoundName(ri, t.rounds.length)});
-        });
+      (t.rounds||[]).forEach((rnd,ri)=>{
+        rnd.filter(m=>m.done&&!m.isBye).forEach(m=>matchList.push({...m,phaseLbl:koRound(ri,t.rounds.length)}));
       });
     } else {
-      (t.matches||[]).filter(m=>m.done).forEach(m=>matchList.push({...m,phaseLbl:'Round Robin'}));
+      (t.matches||[]).filter(m=>m.done).forEach(m=>matchList.push({...m,phaseLbl:'League'}));
       if(t.final&&t.final.done) matchList.push({...t.final,phaseLbl:'Final'});
     }
 
@@ -871,31 +997,33 @@ function renderHistory(){
       const sc=(m.scores||[]).map(g=>`${g[0]}–${g[1]}`).join(' | ');
       const w1=m.winner&&m.t1&&m.winner.id===m.t1.id;
       const w2=m.winner&&m.t2&&m.winner.id===m.t2.id;
-      return`<div class="mrow done" style="background:var(--bg3);margin-bottom:6px">
-        <span class="mnum" style="font-size:9px;color:var(--tx3);min-width:60px">${m.phaseLbl}</span>
+      return`<div class="mrow done" style="margin-bottom:5px">
+        <span class="mnum" style="font-size:9px;min-width:50px">${m.phaseLbl}</span>
         <div class="mteams">
-          <span style="flex:1;font-size:13px;${w1?'color:var(--gml);font-weight:700':''}">${m.t1?m.t1.name:'?'}</span>
-          <span class="mvs">vs</span>
-          <span style="flex:1;font-size:13px;text-align:right;${w2?'color:var(--gml);font-weight:700':''}">${m.t2?m.t2.name:'?'}</span>
+          <span style="flex:1;font-size:13px;${w1?'color:var(--lime);font-weight:700':''}">${m.t1?m.t1.name:'?'}</span>
+          <span class="mvs">VS</span>
+          <span style="flex:1;font-size:13px;text-align:right;${w2?'color:var(--lime);font-weight:700':''}">${m.t2?m.t2.name:'?'}</span>
         </div>
         <span class="mscore" style="margin:0 8px">${sc}</span>
         <span class="mbadge mb-done">W: ${m.winner?m.winner.name:'?'}</span>
       </div>`;
     }).join('');
 
-    // standings snapshot for RR
-    let standingsSnap='';
-    if(t.type==='rr'&&t.standings&&t.standings.length){
-      standingsSnap=`<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--bdr)">
-        <div style="font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:8px;font-weight:600">Final Standings</div>
+    let snap='';
+    if(t.type!=='ko'&&t.standings&&t.standings.length){
+      snap=`<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--bdr)">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:8px;font-family:var(--fh);font-weight:700">Final Standings</div>
         <div class="tbl-wrap"><table>
           <tr><th>#</th><th>Pair</th><th>W</th><th>L</th><th>Pts</th><th>Games</th></tr>
-          ${t.standings.map((s,si)=>`<tr${si<2&&t.matches&&t.matches.every(m=>m.done)?' class="qualify"':''}><td>${si+1}</td><td>${s.name}</td><td>${s.w}</td><td>${s.l}</td><td style="font-weight:700;color:var(--gml)">${s.pts}</td><td>${s.gw}–${s.gl}</td></tr>`).join('')}
+          ${(t.standings||[]).map((s,si)=>`<tr${si===0&&t.champion&&t.champion.id===s.id?' class="qualify"':''}>
+            <td>${si+1}</td><td>${s.name}</td><td>${s.w}</td><td>${s.l}</td>
+            <td style="font-weight:700;color:var(--lime)">${s.pts}</td><td>${s.gw}–${s.gl}</td>
+          </tr>`).join('')}
         </table></div>
       </div>`;
     }
 
-    return`<div class="histcard" id="hcard${i}">
+    return`<div class="histcard">
       <div class="histhead">
         <div class="histhead-left" onclick="toggleHist(${i})">
           <h3>${t.name}</h3>
@@ -903,43 +1031,42 @@ function renderHistory(){
         </div>
         <div class="histhead-right">
           <span class="hist-champ">${champ}</span>
-          <span style="color:var(--tx3);font-size:12px;cursor:pointer" id="arr${i}" onclick="toggleHist(${i})">▼</span>
-          <button class="btn btn-sm btn-red btn-icon" onclick="deleteOneHistory(${t.ts})" title="Delete this tournament">🗑</button>
+          <span style="color:var(--tx3);font-size:12px;cursor:pointer" id="arr_${i}" onclick="toggleHist(${i})">▼</span>
+          <button class="btn btn-sm btn-red btn-icon" onclick="deleteOneHistory(${t.ts})" title="Delete">🗑</button>
         </div>
       </div>
-      <div class="histbody" id="hb${i}">
-        ${rows||'<p style="color:var(--tx3);font-size:13px">No match results recorded yet.</p>'}
-        ${standingsSnap}
+      <div class="histbody" id="hb_${i}">
+        ${rows||'<p style="color:var(--tx3);font-size:13px;padding:4px 0">No matches recorded yet.</p>'}
+        ${snap}
       </div>
     </div>`;
   }).join('');
 }
-
 function toggleHist(i){
-  const b=document.getElementById('hb'+i), a=document.getElementById('arr'+i);
-  const open=b.style.display!=='none'&&b.style.display!=='';
+  const b=document.getElementById('hb_'+i),a=document.getElementById('arr_'+i);
+  if(!b)return;
+  const open=b.style.display==='block';
   b.style.display=open?'none':'block';
   a.textContent=open?'▼':'▲';
 }
 
-// ══════════════════════════════════════
-//  RESET ACTIVE TOURNAMENT
-// ══════════════════════════════════════
+// ════════════════════════════════════
+//  RESET
+// ════════════════════════════════════
 function resetT(){
-  if(!confirm('Reset this tournament? Progress is already saved in History.')) return;
+  if(!confirm('Reset this tournament? Progress is saved in History.'))return;
   activeT=null;
-  document.getElementById('hbadge').textContent='No tournament';
+  document.getElementById('hbadge').textContent='No Tournament';
   document.getElementById('matchContent').innerHTML=
-    '<div class="empty"><div class="icon">🏸</div><strong>No tournament yet</strong><p>Go to Setup to add pairs and start</p></div>';
+    '<div class="empty"><div class="icon">🏸</div><strong>No Tournament Yet</strong><p>Go to Setup to create one</p></div>';
   goTab('setup');
 }
 
-// backdrop click
-document.getElementById('overlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal();});
+document.getElementById('importOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('importOverlay'))closeImport();});
 
-// init
-renderPairs();
-renderHistory();
+// INIT
+renderPairs(); renderHistory(); updateFormatPreviews();
 </script>
 </body>
 </html>
