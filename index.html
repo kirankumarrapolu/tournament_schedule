@@ -10,10 +10,10 @@
 :root{
   --saf:#FF6B1A;--saf2:#E85D0D;--safl:#FFF3EC;--safm:rgba(255,107,26,.12);
   --grn:#138808;--grn2:#0e6606;--grnl:#EDF7EC;--grnm:rgba(19,136,8,.1);
-  --blu:#000080;--blul:#EEF0FF;
+  --blu:#1565C0;--blul:#E3F2FD;
   --bg:#F5F0E8;--bg2:#FFFFFF;--bg3:#FDF8F2;--bg4:#F0EBE1;
   --tx:#1A1205;--tx2:#5A4A35;--tx3:#9A8A72;
-  --bdr:rgba(26,18,5,.1);--bdr2:rgba(26,18,5,.18);--bdr3:rgba(26,18,5,.3);
+  --bdr:rgba(26,18,5,.1);--bdr2:rgba(26,18,5,.18);--bdr3:rgba(26,18,5,.28);
   --red:#DC2626;--redl:#FEF2F2;
   --amb:#D97706;--ambl:#FFFBEB;
   --fd:'Bebas Neue',sans-serif;--fh:'Rajdhani',sans-serif;--fb:'Inter',sans-serif;
@@ -21,10 +21,12 @@
 }
 html,body{min-height:100%;background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px;line-height:1.5}
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:radial-gradient(circle,rgba(255,107,26,.07) 1px,transparent 1px),
-    radial-gradient(circle,rgba(19,136,8,.05) 1px,transparent 1px);
+  background-image:radial-gradient(circle,rgba(255,107,26,.06) 1px,transparent 1px),
+    radial-gradient(circle,rgba(19,136,8,.04) 1px,transparent 1px);
   background-size:32px 32px,64px 64px;background-position:0 0,16px 16px;}
 .wrap{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
+
+/* HEADER */
 header{background:linear-gradient(to bottom,#FF9933 0%,#FF9933 33%,#fff 33%,#fff 66%,#138808 66%,#138808 100%);
   position:sticky;top:0;z-index:60;box-shadow:0 2px 12px rgba(0,0,0,.13);}
 .header-inner{background:rgba(255,255,255,.96);backdrop-filter:blur(12px);
@@ -39,17 +41,20 @@ header{background:linear-gradient(to bottom,#FF9933 0%,#FF9933 33%,#fff 33%,#fff
   background:var(--safm);color:var(--saf2);border:1px solid rgba(255,107,26,.28);}
 
 /* SYNC BAR */
-.sync-bar{display:flex;align-items:center;gap:8px;padding:5px 28px;font-size:11px;
-  background:var(--blul);border-bottom:1px solid rgba(0,0,128,.1);color:#000070;font-family:var(--fh);font-weight:600;}
-.sdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--grn)}
-.sdot.spinning{background:var(--amb);animation:spin .7s linear infinite}
-.sdot.err{background:var(--red);animation:none}
-@keyframes spin{to{transform:rotate(360deg)}}
-.sync-bar button{margin-left:auto;background:none;border:1px solid rgba(0,0,128,.25);
-  border-radius:20px;padding:2px 10px;font-size:10px;font-family:var(--fh);font-weight:700;
-  color:#000070;cursor:pointer;}
-.sync-bar button:hover{background:rgba(0,0,128,.07)}
+.sync-bar{display:flex;align-items:center;gap:8px;padding:6px 28px;font-size:11px;
+  background:var(--blul);border-bottom:1px solid rgba(21,101,192,.15);color:var(--blu);
+  font-family:var(--fh);font-weight:600;flex-wrap:wrap;gap:6px;}
+.sdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--grn);display:inline-block}
+.sdot.spin{background:var(--amb);animation:dotSpin .8s linear infinite}
+.sdot.err{background:var(--red)}
+@keyframes dotSpin{to{transform:rotate(360deg)}}
+.sync-actions{margin-left:auto;display:flex;gap:6px}
+.sync-btn{background:none;border:1px solid rgba(21,101,192,.3);border-radius:20px;
+  padding:2px 10px;font-size:10px;font-family:var(--fh);font-weight:700;color:var(--blu);
+  cursor:pointer;white-space:nowrap;}
+.sync-btn:hover{background:rgba(21,101,192,.07)}
 
+/* TABS */
 .tabbar{display:flex;background:#fff;border-bottom:2px solid var(--bdr);padding:0 28px;
   box-shadow:0 1px 4px rgba(0,0,0,.05);}
 .tbtn{padding:11px 18px;font-size:12px;font-weight:700;background:none;border:none;cursor:pointer;
@@ -70,11 +75,11 @@ main{flex:1;padding:22px 28px;max-width:1040px;width:100%;margin:0 auto}
 .ctitle::before{content:'';display:block;width:3px;height:17px;background:var(--saf);border-radius:2px;flex-shrink:0}
 
 .flabel{font-size:11px;color:var(--tx2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;font-family:var(--fh);font-weight:700}
-input[type=text],input[type=number]{width:100%;padding:9px 12px;border-radius:var(--r);
+input[type=text],input[type=number],textarea{width:100%;padding:9px 12px;border-radius:var(--r);
   border:1.5px solid var(--bdr2);background:var(--bg3);color:var(--tx);
   font-size:14px;font-family:var(--fb);outline:none;transition:border-color .15s;}
-input:focus{border-color:var(--saf);box-shadow:0 0 0 3px rgba(255,107,26,.1)}
-input::placeholder{color:var(--tx3)}
+input:focus,textarea:focus{border-color:var(--saf);box-shadow:0 0 0 3px rgba(255,107,26,.1)}
+input::placeholder,textarea::placeholder{color:var(--tx3)}
 .row{display:flex;gap:10px;align-items:flex-end;margin-bottom:14px}
 .row>div{flex:1}
 
@@ -100,6 +105,8 @@ input::placeholder{color:var(--tx3)}
 .btn-saf:hover{background:linear-gradient(135deg,var(--saf),var(--saf2))}
 .btn-grn{background:linear-gradient(135deg,#2ECC40,var(--grn));color:#fff;border-color:var(--grn2);font-weight:700}
 .btn-grn:hover{background:linear-gradient(135deg,var(--grn),var(--grn2))}
+.btn-blu{background:linear-gradient(135deg,#42A5F5,var(--blu));color:#fff;border-color:#0D47A1;font-weight:700}
+.btn-blu:hover{background:linear-gradient(135deg,var(--blu),#0D47A1)}
 .btn-sm{padding:6px 12px;font-size:12px}
 .btn-red{border-color:#FCA5A5;color:var(--red);background:var(--redl)}
 .btn-red:hover{background:#FEE2E2}
@@ -162,7 +169,6 @@ tr.qualify td:first-child{border-left:3px solid var(--grn)}
 .mb-done{background:var(--grnl);color:var(--grn2);border:1px solid rgba(19,136,8,.22)}
 .mb-pend{background:var(--ambl);color:var(--amb);border:1px solid rgba(217,119,6,.2)}
 .mb-wait{background:var(--bg3);color:var(--tx3);cursor:default;border:1px solid var(--bdr)}
-.mb-bye{background:var(--bg4);color:var(--tx3);cursor:default;border:1px solid var(--bdr)}
 
 .rnd-hdr{font-family:var(--fh);font-size:14px;text-transform:uppercase;letter-spacing:.09em;
   color:var(--saf2);font-weight:700;margin-bottom:9px;padding:8px 13px;
@@ -170,10 +176,6 @@ tr.qualify td:first-child{border-left:3px solid var(--grn)}
   border-left:4px solid var(--saf);display:flex;align-items:center;justify-content:space-between;}
 .rnd-badge{font-size:10px;background:var(--safm);color:var(--saf2);padding:2px 9px;border-radius:20px;font-weight:600;}
 
-/* PLAYOFF/FINAL styles */
-.playoff-section{margin-top:6px}
-.playoff-title{font-family:var(--fd);font-size:20px;letter-spacing:1px;margin-bottom:12px;color:var(--saf2);
-  padding-bottom:8px;border-bottom:2px solid var(--safl);}
 .final-wrap{max-width:520px;margin:0 auto}
 .fmatch{display:flex;align-items:stretch;border-radius:var(--rl);overflow:hidden;
   border:2px solid var(--saf);box-shadow:0 4px 14px rgba(255,107,26,.13)}
@@ -212,6 +214,7 @@ tr.qualify td:first-child{border-left:3px solid var(--grn)}
   font-family:var(--fh);box-shadow:0 4px 12px rgba(19,136,8,.35);}
 .toast.show{opacity:1;transform:translateY(0)}
 
+/* HISTORY */
 .histcard{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rl);
   margin-bottom:13px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.04);}
 .histhead{display:flex;align-items:center;justify-content:space-between;
@@ -219,11 +222,21 @@ tr.qualify td:first-child{border-left:3px solid var(--grn)}
 .histhead-left{flex:1;cursor:pointer;min-width:0;padding-right:10px}
 .histhead h3{font-family:var(--fh);font-size:16px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--tx)}
 .histhead .meta{font-size:11px;color:var(--tx3);margin-top:1px}
-.histhead-right{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.histhead-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .histbody{padding:14px 18px;display:none}
 .nohist{text-align:center;padding:40px;color:var(--tx3)}
 .nohist .icon{font-size:32px;margin-bottom:8px}
 .hist-champ{font-size:12px;color:var(--saf2);font-weight:700;white-space:nowrap;font-family:var(--fh)}
+
+/* CLOUD SETUP PANEL */
+.cloud-setup{background:var(--blul);border:1.5px solid rgba(21,101,192,.2);
+  border-radius:var(--rl);padding:16px 20px;margin-bottom:14px;}
+.cloud-setup h3{font-family:var(--fh);font-size:16px;color:var(--blu);font-weight:700;margin-bottom:6px}
+.cloud-setup p{font-size:12px;color:var(--tx2);margin-bottom:12px;line-height:1.6}
+.cloud-setup ol{font-size:12px;color:var(--tx2);padding-left:18px;margin-bottom:12px;line-height:2}
+.cloud-setup a{color:var(--blu);font-weight:600}
+.code-badge{font-family:monospace;background:rgba(21,101,192,.1);color:var(--blu);
+  padding:2px 6px;border-radius:4px;font-size:11px}
 
 /* PairUp popup */
 .pu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);
@@ -278,6 +291,9 @@ tr.qualify td:first-child{border-left:3px solid var(--grn)}
 .empty strong{color:var(--tx2);font-family:var(--fh);font-size:16px}
 .empty p{font-size:13px;margin-top:5px}
 
+.playoff-title{font-family:var(--fd);font-size:20px;letter-spacing:1px;margin-bottom:12px;
+  color:var(--saf2);padding-bottom:8px;border-bottom:2px solid var(--safl);margin-top:6px;}
+
 @media(max-width:680px){
   .header-inner,.tabbar,main,.sync-bar{padding-left:14px;padding-right:14px}
   .sbar{grid-template-columns:repeat(2,1fr)}
@@ -304,17 +320,20 @@ tr.qualify td:first-child{border-left:3px solid var(--grn)}
   </div>
 </header>
 
-<!-- SYNC BAR -->
 <div class="sync-bar" id="syncBar">
-  <span class="sdot spinning" id="sdot"></span>
-  <span id="syncMsg">Connecting to shared cloud...</span>
-  <button onclick="manualSync()">↻ Sync Now</button>
+  <span class="sdot spin" id="sdot"></span>
+  <span id="syncMsg">Checking cloud...</span>
+  <div class="sync-actions">
+    <button class="sync-btn" onclick="manualSync()">↻ Sync</button>
+    <button class="sync-btn" onclick="goTab('settings')">⚙ Cloud Setup</button>
+  </div>
 </div>
 
 <div class="tabbar">
   <button class="tbtn active" onclick="goTab('setup')">⚙ Setup</button>
   <button class="tbtn" onclick="goTab('matches')">🏸 Matches</button>
   <button class="tbtn" onclick="goTab('results')">📋 History</button>
+  <button class="tbtn" onclick="goTab('settings')">☁ Cloud</button>
 </div>
 
 <main>
@@ -333,26 +352,26 @@ tr.qualify td:first-child{border-left:3px solid var(--grn)}
     <div class="ctitle">Tournament Details</div>
     <div style="margin-bottom:15px">
       <div class="flabel">Tournament Name</div>
-      <input type="text" id="tname" value="Hyderabad Badminton Open 2026"/>
+      <input type="text" id="tname" value="Hyderabad Badminton Open 2025"/>
     </div>
     <div class="ctitle">Choose Format</div>
     <div class="fmtgrid">
       <div class="fopt" id="fmt-league" onclick="setFmt('league')">
         <div class="ftag">League</div>
         <h3>League Only</h3>
-        <p>Every pair plays all others (Best of 3). Best record wins — no separate Final.</p>
+        <p>Every pair plays all others (Best of 3). Best record wins.</p>
         <div class="mprev" id="prev-league">Add pairs to preview</div>
       </div>
       <div class="fopt sel" id="fmt-league_ko" onclick="setFmt('league_ko')">
         <div class="ftag">Popular ⭐</div>
         <h3>League + Final</h3>
-        <p>All pairs play each other (Best of 3). Top 2 by points fight in a Final match.</p>
+        <p>All pairs play each other (Best of 3). Top 2 advance to a Final match.</p>
         <div class="mprev" id="prev-league_ko">Add pairs to preview</div>
       </div>
       <div class="fopt" id="fmt-ko" onclick="setFmt('ko')">
         <div class="ftag">Knockout</div>
         <h3>Pure Knockout</h3>
-        <p>Every team plays each other once (single game). Top 2 (or 3 if tied) advance to Finals.</p>
+        <p>Each pair plays all others once (single game). Top 2 (or 3 if 5+ pairs) go to playoffs.</p>
         <div class="mprev" id="prev-ko">Add pairs to preview</div>
       </div>
     </div>
@@ -384,12 +403,64 @@ tr.qualify td:first-child{border-left:3px solid var(--grn)}
 <!-- HISTORY -->
 <div id="sec-results" class="sec">
   <div class="sechdr">
-    <div><h2>Tournament History</h2><p>Shared in real-time — all devices see the same results</p></div>
+    <div><h2>Tournament History</h2><p id="histSubtitle">Loading from cloud...</p></div>
     <div class="sechdr-actions">
       <button class="btn btn-sm btn-red" onclick="clearAllHistory()">🗑 Clear All</button>
     </div>
   </div>
   <div id="histContent"></div>
+</div>
+
+<!-- CLOUD SETTINGS -->
+<div id="sec-settings" class="sec">
+  <div class="sechdr"><div><h2>Cloud Setup</h2><p>Connect a shared database so everyone sees results</p></div></div>
+
+  <div class="cloud-setup">
+    <h3>☁ How Shared Cloud Works</h3>
+    <p>This app uses <strong>JSONBin.io</strong> — a free cloud storage service. Create one free account, paste your <strong>Master Key</strong> and <strong>Bin ID</strong> below. Everyone who opens this page with the same keys will see the same results.</p>
+    <ol>
+      <li>Go to <a href="https://jsonbin.io" target="_blank">jsonbin.io</a> → Sign up free</li>
+      <li>Click <strong>API Keys</strong> in the dashboard → copy your <span class="code-badge">Master Key</span></li>
+      <li>Click <strong>Create Bin</strong> → paste <span class="code-badge">[]</span> as content → Save → copy the <span class="code-badge">Bin ID</span></li>
+      <li>Paste both below and click <strong>Save & Test</strong></li>
+      <li>Share this HTML file with everyone — they paste the same keys</li>
+    </ol>
+    <p style="color:var(--grn2);font-weight:600">✅ Once set up, all results sync automatically across all devices!</p>
+  </div>
+
+  <div class="card">
+    <div class="ctitle">JSONBin.io Credentials</div>
+    <div style="margin-bottom:12px">
+      <div class="flabel">Master Key (from jsonbin.io → API Keys)</div>
+      <input type="text" id="jbKey" placeholder="$2a$10$..." style="font-family:monospace;font-size:12px"/>
+    </div>
+    <div style="margin-bottom:16px">
+      <div class="flabel">Bin ID (from your created bin)</div>
+      <input type="text" id="jbBin" placeholder="64a1b2c3d4e5f6..." style="font-family:monospace;font-size:12px"/>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-grn" onclick="saveCloudCreds()">💾 Save & Test Connection</button>
+      <button class="btn btn-sm" onclick="clearCloudCreds()">Clear Credentials</button>
+    </div>
+    <div id="credStatus" style="margin-top:12px;font-size:12px;font-family:var(--fh);font-weight:600"></div>
+  </div>
+
+  <div class="card">
+    <div class="ctitle">Manual Backup (no cloud)</div>
+    <p style="font-size:12px;color:var(--tx2);margin-bottom:12px">If you don't want cloud sync, use Export/Import to share results manually.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-saf" onclick="exportData()">📤 Export Data</button>
+      <button class="btn btn-sm" onclick="showImportBox()">📥 Import Data</button>
+    </div>
+    <div id="importBox" style="display:none;margin-top:12px">
+      <textarea id="importTxt" rows="4" placeholder="Paste exported data here..." style="margin-bottom:8px"></textarea>
+      <button class="btn btn-grn btn-sm" onclick="importData()">Import ✓</button>
+    </div>
+    <div id="exportOut" style="display:none;margin-top:12px">
+      <textarea id="exportTxt" rows="4" readonly style="font-size:11px;font-family:monospace"></textarea>
+      <p style="font-size:11px;color:var(--tx2);margin-top:4px">Copy this code and send it to others. They paste it via Import.</p>
+    </div>
+  </div>
 </div>
 
 </main>
@@ -401,15 +472,12 @@ tr.qualify td:first-child{border-left:3px solid var(--grn)}
 <div class="pu-overlay" id="puOverlay">
   <div class="pu-box">
     <div class="pu-head">
-      <div>
-        <strong>🎲 PairUp — Random Pair Maker</strong>
-        <span>Generate pairs, then click "Use These Pairs" below</span>
-      </div>
+      <div><strong>🎲 PairUp — Random Pair Maker</strong><span>Generate pairs then click "Use These Pairs"</span></div>
       <button class="btn btn-sm btn-red" onclick="closePairUp()">✕ Close</button>
     </div>
     <iframe class="pu-iframe" id="puFrame" src="https://luckydraw-pi.vercel.app/"></iframe>
     <div class="pu-foot">
-      <p>💡 After generating pairs in PairUp, click the button to import them here</p>
+      <p>💡 After generating pairs in PairUp, click the button to import them</p>
       <button class="btn btn-grn" onclick="tryGrabPairs()">✅ Use These Pairs</button>
     </div>
   </div>
@@ -436,101 +504,158 @@ tr.qualify td:first-child{border-left:3px solid var(--grn)}
 </div>
 
 <script>
-// ═══════════════════════════════════════════════
-//  FIREBASE REALTIME DATABASE  — shared by everyone
-//  Free tier, no auth needed for public read/write
-// ═══════════════════════════════════════════════
-const FB_URL = 'https://smash-shuttlers-default-rtdb.firebaseio.com/tournaments.json';
-// ^^^ This is a real Firebase Realtime DB URL pointing to a free project
-// created specifically for this app. Public read/write rules enabled.
-// All users of this HTML file share the same database.
+// ══════════════════════════════════════════════
+//  CLOUD STORAGE — JSONBin.io
+//  User sets their own API key + bin ID once.
+//  All devices with same credentials share data.
+// ══════════════════════════════════════════════
+const LKEY     = 'ss_data_v6';
+const CRED_KEY = 'ss_creds_v1';
 
-let cloudOnline = false;
+function getCreds(){ try{ return JSON.parse(localStorage.getItem(CRED_KEY)||'null'); }catch{ return null; } }
+function saveCreds(k,b){ localStorage.setItem(CRED_KEY,JSON.stringify({key:k,bin:b})); }
 
-function setSyncUI(state, msg){
-  const dot = document.getElementById('sdot');
-  const txt = document.getElementById('syncMsg');
-  dot.className = 'sdot' + (state==='syncing'?' spinning':state==='err'?' err':'');
-  txt.textContent = msg;
-  cloudOnline = (state==='ok');
-}
-
-async function fbGet(){
+async function cloudRead(){
+  const c=getCreds(); if(!c||!c.key||!c.bin) return null;
   try{
-    const r = await fetch(FB_URL, {cache:'no-store'});
+    const r=await fetch(`https://api.jsonbin.io/v3/b/${c.bin}/latest`,{
+      headers:{'X-Master-Key':c.key,'X-Bin-Meta':'false'},cache:'no-store'
+    });
     if(!r.ok) return null;
-    const j = await r.json();
-    if(!j) return [];
-    // Firebase returns an object; we stored as array under key "list"
-    if(Array.isArray(j)) return j;
-    if(j.list && Array.isArray(j.list)) return j.list;
-    return null;
-  }catch{ return null; }
+    const j=await r.json();
+    // JSONBin wraps in {record:...} or returns data directly
+    const data=j.record!==undefined?j.record:j;
+    if(Array.isArray(data)) return data;
+    if(data&&Array.isArray(data.list)) return data.list;
+    return [];
+  }catch(e){ console.warn('cloudRead',e); return null; }
 }
 
-async function fbSet(hist){
+async function cloudWrite(hist){
+  const c=getCreds(); if(!c||!c.key||!c.bin) return false;
   try{
-    const r = await fetch(FB_URL, {
+    const r=await fetch(`https://api.jsonbin.io/v3/b/${c.bin}`,{
       method:'PUT',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({list: hist, updatedAt: Date.now()})
+      headers:{'Content-Type':'application/json','X-Master-Key':c.key},
+      body:JSON.stringify(hist)
     });
     return r.ok;
-  }catch{ return false; }
+  }catch(e){ console.warn('cloudWrite',e); return false; }
+}
+
+// ══════════════════════════════════════════════
+//  SYNC STATUS UI
+// ══════════════════════════════════════════════
+let cloudOnline=false;
+function setSyncUI(state,msg){
+  const dot=document.getElementById('sdot');
+  const txt=document.getElementById('syncMsg');
+  dot.className='sdot'+(state==='spin'?' spin':state==='err'?' err':'');
+  txt.textContent=msg;
+  cloudOnline=(state==='ok');
 }
 
 async function initCloud(){
-  setSyncUI('syncing','Connecting to shared database...');
-  const remote = await fbGet();
-  if(remote !== null){
-    const merged = mergeHist(remote, loadLocal());
+  const c=getCreds();
+  if(!c||!c.key||!c.bin){
+    setSyncUI('err','No cloud configured — click "Cloud Setup" to enable shared results');
+    return;
+  }
+  setSyncUI('spin','Connecting to JSONBin cloud...');
+  const remote=await cloudRead();
+  if(remote!==null){
+    const merged=mergeHist(remote,loadLocal());
     saveLocal(merged);
-    setSyncUI('ok', `☁ Live sync active — ${merged.length} tournament(s) shared with everyone`);
+    setSyncUI('ok',`☁ Cloud synced — ${merged.length} tournament(s) shared across all devices`);
+    renderHistory();
   } else {
-    setSyncUI('err','Cloud unavailable — results saved locally only');
+    setSyncUI('err','Cloud connection failed — check credentials in Cloud Setup');
   }
 }
 
 async function syncUp(hist){
-  setSyncUI('syncing','Syncing to cloud...');
-  const ok = await fbSet(hist);
-  if(ok) setSyncUI('ok', `☁ Saved to cloud — ${hist.length} tournament(s) visible to all`);
-  else   setSyncUI('err','Cloud save failed — stored locally');
+  const c=getCreds();
+  if(!c||!c.key||!c.bin){ return; } // no cloud, just local
+  setSyncUI('spin','Saving to cloud...');
+  const ok=await cloudWrite(hist);
+  if(ok) setSyncUI('ok',`☁ Saved — ${hist.length} tournament(s) shared`);
+  else   setSyncUI('err','Cloud save failed — stored locally only');
 }
 
 async function manualSync(){
-  setSyncUI('syncing','Syncing...');
-  const remote = await fbGet();
-  const local  = loadLocal();
-  if(remote !== null){
-    const merged = mergeHist(remote, local);
+  const c=getCreds();
+  if(!c||!c.key||!c.bin){ showToast('⚙ Set up cloud first → Cloud tab'); goTab('settings'); return; }
+  setSyncUI('spin','Syncing...');
+  const remote=await cloudRead();
+  const local=loadLocal();
+  if(remote!==null){
+    const merged=mergeHist(remote,local);
     saveLocal(merged);
-    await fbSet(merged);
-    setSyncUI('ok', `☁ Synced — ${merged.length} tournament(s)`);
+    await cloudWrite(merged);
+    setSyncUI('ok',`☁ Synced — ${merged.length} tournament(s)`);
     renderHistory();
-    showToast('☁ Synced!');
+    showToast('☁ Synced with cloud!');
   } else {
     setSyncUI('err','Could not reach cloud');
+    showToast('❌ Cloud unreachable — check credentials');
   }
 }
 
-function mergeHist(a, b){
-  const map = {};
+async function saveCloudCreds(){
+  const key=document.getElementById('jbKey').value.trim();
+  const bin=document.getElementById('jbBin').value.trim();
+  if(!key||!bin){ showStatus('credStatus','Please enter both Master Key and Bin ID','red'); return; }
+  saveCreds(key,bin);
+  showStatus('credStatus','Testing connection...','blue');
+  setSyncUI('spin','Testing...');
+  const data=await cloudRead();
+  if(data!==null){
+    showStatus('credStatus','✅ Connected! Cloud sync is now active. Share the same keys with everyone.','green');
+    setSyncUI('ok',`☁ Connected — ${data.length} tournament(s) in cloud`);
+    // Push local data up
+    const local=loadLocal();
+    const merged=mergeHist(data,local);
+    saveLocal(merged);
+    await cloudWrite(merged);
+    renderHistory();
+  } else {
+    showStatus('credStatus','❌ Connection failed — check your Master Key and Bin ID','red');
+    setSyncUI('err','Cloud credentials failed');
+  }
+}
+
+function clearCloudCreds(){
+  if(!confirm('Remove cloud credentials? You can re-add them anytime.')) return;
+  localStorage.removeItem(CRED_KEY);
+  document.getElementById('jbKey').value='';
+  document.getElementById('jbBin').value='';
+  showStatus('credStatus','Credentials cleared. Results will only save locally.','amber');
+  setSyncUI('err','No cloud configured');
+}
+
+function showStatus(id,msg,color){
+  const el=document.getElementById(id);
+  const colors={green:'var(--grn2)',red:'var(--red)',blue:'var(--blu)',amber:'var(--amb)'};
+  el.style.color=colors[color]||'var(--tx2)';
+  el.textContent=msg;
+}
+
+// ══════════════════════════════════════════════
+//  LOCAL STORAGE
+// ══════════════════════════════════════════════
+function loadLocal(){ try{ return JSON.parse(localStorage.getItem(LKEY)||'[]'); }catch{ return []; } }
+function saveLocal(h){ try{ localStorage.setItem(LKEY,JSON.stringify(h)); }catch(e){ console.warn(e); } }
+
+function mergeHist(a,b){
+  const map={};
   [...(a||[]),...(b||[])].forEach(t=>{ if(t&&t.ts) map[t.ts]=t; });
   return Object.values(map).sort((x,y)=>y.ts-x.ts);
 }
 
-// ═══════════════════════════════════
-//  LOCAL STORAGE
-// ═══════════════════════════════════
-const LKEY = 'smash_shuttlers_v5';
-function loadLocal(){ try{ return JSON.parse(localStorage.getItem(LKEY)||'[]'); }catch{ return []; } }
-function saveLocal(h){ try{ localStorage.setItem(LKEY, JSON.stringify(h)); }catch(e){ console.warn(e); } }
-
 async function saveHistory(t){
-  let hist = loadLocal();
-  const snap = JSON.parse(JSON.stringify(t));
-  const idx  = hist.findIndex(x=>x.ts===t.ts);
+  let hist=loadLocal();
+  const snap=JSON.parse(JSON.stringify(t));
+  const idx=hist.findIndex(x=>x.ts===t.ts);
   if(idx>=0) hist[idx]=snap; else hist.unshift(snap);
   saveLocal(hist);
   await syncUp(hist);
@@ -539,38 +664,69 @@ function loadHist(){ return loadLocal(); }
 
 async function deleteOneHistory(ts){
   if(!confirm('Delete this tournament?')) return;
-  const hist = loadLocal().filter(h=>h.ts!==ts);
+  const hist=loadLocal().filter(h=>h.ts!==ts);
   saveLocal(hist);
   await syncUp(hist);
   renderHistory();
 }
 async function clearAllHistory(){
-  if(!confirm('Delete ALL history from cloud?')) return;
+  if(!confirm('Delete ALL history?')) return;
   saveLocal([]);
-  await fbSet([]);
-  setSyncUI('ok','☁ All cleared');
+  await syncUp([]);
   renderHistory();
 }
 
-// ═══════════════════════════════════
+// Export/Import
+function exportData(){
+  const hist=loadLocal();
+  if(!hist.length){ showToast('No data to export'); return; }
+  const s=btoa(unescape(encodeURIComponent(JSON.stringify(hist))));
+  document.getElementById('exportTxt').value=s;
+  document.getElementById('exportOut').style.display='block';
+  document.getElementById('importBox').style.display='none';
+  try{ navigator.clipboard.writeText(s).then(()=>showToast('📤 Copied to clipboard!')); }catch(e){}
+}
+function showImportBox(){
+  document.getElementById('importBox').style.display='block';
+  document.getElementById('exportOut').style.display='none';
+}
+function importData(){
+  const raw=document.getElementById('importTxt').value.trim();
+  if(!raw){ alert('Paste export data first.'); return; }
+  try{
+    const data=JSON.parse(decodeURIComponent(escape(atob(raw))));
+    if(!Array.isArray(data)) throw 0;
+    const merged=mergeHist(data,loadLocal());
+    saveLocal(merged);
+    syncUp(merged);
+    renderHistory();
+    showToast(`📥 Imported ${data.length} tournament(s)`);
+  }catch{ alert('Invalid data. Make sure you pasted the full export code.'); }
+}
+
+// ══════════════════════════════════════════════
 //  STATE
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 let pairs=[], fmt='league_ko', activeT=null, currentMid=null, pidx=1;
 
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 //  TABS
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 function goTab(t){
-  ['setup','matches','results'].forEach((id,i)=>{
+  ['setup','matches','results','settings'].forEach((id,i)=>{
     document.getElementById('sec-'+id).classList.toggle('active',id===t);
     document.querySelectorAll('.tbtn')[i].classList.toggle('active',id===t);
   });
   if(t==='results') manualSync().then(()=>renderHistory());
+  if(t==='settings'){
+    const c=getCreds();
+    if(c){ document.getElementById('jbKey').value=c.key||''; document.getElementById('jbBin').value=c.bin||''; }
+  }
 }
 
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 //  FORMAT
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 function setFmt(f){
   fmt=f;
   ['league','league_ko','ko'].forEach(x=>document.getElementById('fmt-'+x).classList.toggle('sel',x===f));
@@ -579,60 +735,53 @@ function setFmt(f){
 function leagueM(n){ return n*(n-1)/2; }
 function updatePreviews(){
   const n=pairs.length, lm=leagueM(n);
-  const koM=leagueM(n); // KO also plays everyone once: n*(n-1)/2 group matches + playoffs
-  document.getElementById('prev-league').textContent   = n<2?'Add ≥2 pairs':`${lm} matches (Best of 3 each)`;
-  document.getElementById('prev-league_ko').textContent = n<3?'Add ≥3 pairs':`${lm} league + 1 Final`;
-  document.getElementById('prev-ko').textContent        = n<3?'Add ≥3 pairs':`${koM} group matches (1 game each) + playoffs`;
-  const hints={
-    league:`League: ${n} pairs, ${lm} matches, Best of 3`,
-    league_ko:`League + Final: ${lm} matches → top 2 play Final`,
-    ko:`Knockout: ${koM} group matches (single game) → top 2/3 play off for Final`
-  };
-  document.getElementById('fmt-hint').textContent = n>=2?hints[fmt]:'';
+  document.getElementById('prev-league').textContent=n<2?'Add ≥2 pairs':`${lm} matches (Best of 3 each)`;
+  document.getElementById('prev-league_ko').textContent=n<3?'Add ≥3 pairs':`${lm} league + 1 Final`;
+  document.getElementById('prev-ko').textContent=n<3?'Add ≥3 pairs':`${lm} group matches (1 game each) + playoffs`;
+  const h={league:`League: ${n} pairs, ${lm} total matches`,league_ko:`League + Final: ${lm} matches → top 2 play Final`,
+    ko:`KO: ${lm} group matches (single game) → top ${n>=5?3:2} play playoffs`};
+  document.getElementById('fmt-hint').textContent=n>=2?h[fmt]:'';
 }
 
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 //  PAIRS
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 function addPair(name){
   let p1,p2;
   if(name){
-    const parts = name.split(/\s*[\/&\-]\s*/);
+    const parts=name.split(/\s*[\/&\-]\s*/);
     p1=(parts[0]||'').trim(); p2=(parts[1]||'').trim();
-    if(!p1||!p2){ showToast('⚠ Could not parse: '+name); return; }
+    if(!p1||!p2){ showToast('Could not parse: '+name); return; }
   } else {
-    p1=document.getElementById('p1').value.trim();
-    p2=document.getElementById('p2').value.trim();
+    p1=document.getElementById('p1').value.trim(); p2=document.getElementById('p2').value.trim();
     if(!p1||!p2){ alert('Enter both player names.'); return; }
     document.getElementById('p1').value=''; document.getElementById('p2').value='';
     document.getElementById('p1').focus();
   }
   const pname=p1+' / '+p2;
   if(pairs.find(p=>p.name.toLowerCase()===pname.toLowerCase())){ showToast('Already added: '+pname); return; }
-  pairs.push({id:pidx++, name:pname});
+  pairs.push({id:pidx++,name:pname});
   renderPairs(); updatePreviews();
 }
 function removePair(id){ pairs=pairs.filter(p=>p.id!==id); renderPairs(); updatePreviews(); }
 function renderPairs(){
-  document.getElementById('plist').innerHTML = pairs.map((p,i)=>`
-    <div class="pitem">
-      <div><span class="pnum">#${i+1}</span>🏸 ${p.name}</div>
-      <button class="dbtn" onclick="removePair(${p.id})">×</button>
-    </div>`).join('');
-  document.getElementById('pcount').textContent = pairs.length+' pair'+(pairs.length!==1?'s':'')+' registered';
+  document.getElementById('plist').innerHTML=pairs.map((p,i)=>`
+    <div class="pitem"><div><span class="pnum">#${i+1}</span>🏸 ${p.name}</div>
+    <button class="dbtn" onclick="removePair(${p.id})">×</button></div>`).join('');
+  document.getElementById('pcount').textContent=pairs.length+' pair'+(pairs.length!==1?'s':'')+' registered';
 }
 
-// ═══════════════════════════════════
-//  PAIRUP POPUP
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
+//  PAIRUP
+// ══════════════════════════════════════════════
 function openPairUp(){ document.getElementById('puOverlay').classList.add('open'); }
 function closePairUp(){ document.getElementById('puOverlay').classList.remove('open'); }
 function tryGrabPairs(){
-  const frame = document.getElementById('puFrame');
-  try{ frame.contentWindow.postMessage({action:'getPairs'},'*'); frame.contentWindow.postMessage('getPairs','*'); }catch(e){}
-  setTimeout(()=>showToast('💡 If not imported, add pairs manually below')  ,1200);
+  const f=document.getElementById('puFrame');
+  try{ f.contentWindow.postMessage({action:'getPairs'},'*'); f.contentWindow.postMessage('getPairs','*'); }catch(e){}
+  setTimeout(()=>showToast('💡 If not imported, add pairs manually below'),1200);
 }
-window.addEventListener('message', e=>{
+window.addEventListener('message',e=>{
   if(!e.origin.includes('vercel.app')&&!e.origin.includes('localhost')) return;
   const d=e.data; if(!d) return;
   let list=[];
@@ -643,31 +792,29 @@ window.addEventListener('message', e=>{
   if(list.length){
     let added=0;
     list.forEach(s=>{ const before=pairs.length; addPair(String(s).trim()); if(pairs.length>before) added++; });
-    closePairUp();
-    showToast(`✅ ${added} pair${added!==1?'s':''} imported!`);
+    closePairUp(); showToast(`✅ ${added} pair${added!==1?'s':''} imported!`);
   }
 });
 
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 //  START TOURNAMENT
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 function startTournament(){
   if(pairs.length<2){ alert('Add at least 2 pairs.'); return; }
   if((fmt==='league'||fmt==='league_ko')&&pairs.length<3){ alert('League format needs ≥3 pairs.'); return; }
-  if(fmt==='ko'&&pairs.length<3){ alert('Knockout format needs ≥3 pairs.'); return; }
+  if(fmt==='ko'&&pairs.length<3){ alert('Pure Knockout needs ≥3 pairs.'); return; }
   const name=document.getElementById('tname').value.trim()||'Tournament';
   if(fmt==='ko')          activeT=buildKO(name,[...pairs]);
   else if(fmt==='league') activeT=buildLeague(name,[...pairs],false);
   else                    activeT=buildLeague(name,[...pairs],true);
   document.getElementById('hbadge').textContent=name;
   saveHistory(activeT);
-  renderMatches();
-  goTab('matches');
+  renderMatches(); goTab('matches');
 }
 
-// ═══════════════════════════════════
-//  LEAGUE BUILD
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
+//  LEAGUE
+// ══════════════════════════════════════════════
 function buildLeague(name,ps,hasFinal){
   const matches=[]; let mid=0;
   for(let i=0;i<ps.length;i++)
@@ -680,8 +827,8 @@ function buildLeague(name,ps,hasFinal){
 function rebuildStandings(t){
   t.standings=t.pairs.map(p=>({...p,w:0,l:0,pts:0,gw:0,gl:0,played:0}));
   t.matches.filter(m=>m.done&&m.winner).forEach(m=>{
-    const wid=m.winner.id, lid=m.t1.id===wid?m.t2.id:m.t1.id;
-    const ws=t.standings.find(s=>s.id===wid), ls=t.standings.find(s=>s.id===lid);
+    const wid=m.winner.id,lid=m.t1.id===wid?m.t2.id:m.t1.id;
+    const ws=t.standings.find(s=>s.id===wid),ls=t.standings.find(s=>s.id===lid);
     const wt1=m.t1.id===wid;
     if(ws){ws.w++;ws.pts+=3;ws.played++;}
     if(ls){ls.l++;ls.played++;}
@@ -696,45 +843,32 @@ function checkLeagueDone(t){
   rebuildStandings(t);
   if(!t.matches.every(m=>m.done)) return;
   if(!t.hasFinal){t.champion=t.standings[0];t.done=true;return;}
-  if(!t.final){
-    const top=t.standings.slice(0,2);
-    t.final={id:'final',t1:top[0],t2:top[1],winner:null,scores:[],done:false,phase:'final'};
-  }
+  if(!t.final){const top=t.standings.slice(0,2);t.final={id:'final',t1:top[0],t2:top[1],winner:null,scores:[],done:false,phase:'final'};}
   if(t.final&&t.final.done){t.champion=t.final.winner;t.done=true;}
 }
 
-// ═══════════════════════════════════
-//  PURE KNOCKOUT BUILD
-//  Rules:
-//   - Every pair plays every other pair ONCE (single game, not Bo3)
-//   - After all group matches: rank by wins (then point diff)
-//   - If 4 or fewer pairs: top 2 go to Final
-//   - If 5+ pairs: top 3 qualify; 2nd vs 3rd in a semi to find Final opponent for 1st
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
+//  PURE KNOCKOUT
+//  Every pair plays every other once (single game)
+//  ≤4 pairs: top 2 → Final
+//  5+ pairs: top 3 → 2nd vs 3rd Semi, winner vs 1st Final
+// ══════════════════════════════════════════════
 function buildKO(name,ps){
-  // Build all group matches (round-robin, single game each)
   const matches=[]; let mid=0;
   for(let i=0;i<ps.length;i++)
     for(let j=i+1;j<ps.length;j++)
       matches.push({id:'gm'+(mid++),t1:ps[i],t2:ps[j],winner:null,scores:[],done:false,phase:'group'});
-
-  return{
-    type:'ko',name,pairs:ps,matches,
+  return{type:'ko',name,pairs:ps,matches,
     standings:ps.map(p=>({...p,w:0,l:0,pts:0,gw:0,gl:0,played:0})),
-    // playoffs built after group stage is complete
-    semi:null,   // only used if ≥5 pairs (2nd vs 3rd)
-    final:null,  // always: winner of semi (or 2nd) vs 1st place
-    champion:null,done:false,ts:Date.now()
-  };
+    semi:null,final:null,champion:null,done:false,ts:Date.now()};
 }
-
 function rebuildKOStandings(t){
   t.standings=t.pairs.map(p=>({...p,w:0,l:0,pts:0,gw:0,gl:0,played:0}));
   t.matches.filter(m=>m.done&&m.winner).forEach(m=>{
-    const wid=m.winner.id, lid=m.t1.id===wid?m.t2.id:m.t1.id;
-    const ws=t.standings.find(s=>s.id===wid), ls=t.standings.find(s=>s.id===lid);
+    const wid=m.winner.id,lid=m.t1.id===wid?m.t2.id:m.t1.id;
+    const ws=t.standings.find(s=>s.id===wid),ls=t.standings.find(s=>s.id===lid);
     const wt1=m.t1.id===wid;
-    if(ws){ws.w++;ws.pts+=2;ws.played++;}  // 2 pts per win in KO group
+    if(ws){ws.w++;ws.pts+=2;ws.played++;}
     if(ls){ls.l++;ls.played++;}
     (m.scores||[]).forEach(([a,b])=>{
       if(ws){ws.gw+=(wt1?a:b);ws.gl+=(wt1?b:a);}
@@ -743,88 +877,58 @@ function rebuildKOStandings(t){
   });
   t.standings.sort((a,b)=>b.pts-a.pts||(b.gw-b.gl)-(a.gw-a.gl)||b.gw-a.gw);
 }
-
 function checkKODone(t){
   rebuildKOStandings(t);
-  const allGroupDone=t.matches.every(m=>m.done);
-  if(!allGroupDone) return;
-
-  const n=t.pairs.length;
-  const top=t.standings;
-
-  // Create playoffs if not yet created
+  const allDone=t.matches.every(m=>m.done);
+  if(!allDone) return;
+  const n=t.pairs.length,top=t.standings;
   if(!t.semi&&!t.final){
-    if(n>=5){
-      // 2nd vs 3rd to find who faces 1st in final
-      t.semi={id:'semi',t1:top[1],t2:top[2],winner:null,scores:[],done:false,phase:'semi'};
-    } else {
-      // ≤4 pairs: top 2 go straight to final
-      t.final={id:'final',t1:top[0],t2:top[1],winner:null,scores:[],done:false,phase:'final'};
-    }
+    if(n>=5) t.semi={id:'semi',t1:top[1],t2:top[2],winner:null,scores:[],done:false,phase:'semi'};
+    else t.final={id:'final',t1:top[0],t2:top[1],winner:null,scores:[],done:false,phase:'final'};
   }
-
-  // If semi exists and done, create final
-  if(t.semi&&t.semi.done&&!t.final){
+  if(t.semi&&t.semi.done&&!t.final)
     t.final={id:'final',t1:top[0],t2:t.semi.winner,winner:null,scores:[],done:false,phase:'final'};
-  }
-
-  // Champion
   if(t.final&&t.final.done){t.champion=t.final.winner;t.done=true;}
 }
 
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 //  RENDER
-// ═══════════════════════════════════
-function sdStr(scores,ti){ if(!scores||!scores.length)return''; return scores.map(g=>`${g[ti]}–${g[1-ti]}`).join(' | '); }
+// ══════════════════════════════════════════════
+function sdStr(s,ti){ return s&&s.length?s.map(g=>`${g[ti]}–${g[1-ti]}`).join(' | '):''; }
 function renderMatches(){
-  if(!activeT){
-    document.getElementById('matchContent').innerHTML='<div class="empty"><div class="icon">🏸</div><strong>No Tournament Yet</strong><p>Go to Setup to create one</p></div>';
-    return;
-  }
+  if(!activeT){document.getElementById('matchContent').innerHTML='<div class="empty"><div class="icon">🏸</div><strong>No Tournament Yet</strong><p>Go to Setup to create one</p></div>';return;}
   activeT.type==='ko'?renderKO(activeT):renderLeague(activeT);
 }
 
-/* ── LEAGUE ── */
 function renderLeague(t){
   rebuildStandings(t);
-  const played=t.matches.filter(m=>m.done).length;
-  const total=t.matches.length;
-  const allDone=t.matches.every(m=>m.done);
-  const fDone=!!(t.final&&t.final.done);
-
-  let h=`
-  <div class="sechdr">
-    <div><h2>${t.name}</h2><p>${t.hasFinal?'League + Final':'League Only'} · ${t.pairs.length} pairs · every pair plays every other</p></div>
-    <div class="sechdr-actions"><button class="btn btn-sm btn-red" onclick="resetT()">Reset</button></div>
-  </div>
+  const played=t.matches.filter(m=>m.done).length,total=t.matches.length;
+  const allDone=t.matches.every(m=>m.done),fDone=!!(t.final&&t.final.done);
+  let h=`<div class="sechdr"><div><h2>${t.name}</h2><p>${t.hasFinal?'League + Final':'League Only'} · ${t.pairs.length} pairs</p></div>
+    <div class="sechdr-actions"><button class="btn btn-sm btn-red" onclick="resetT()">Reset</button></div></div>
   <div class="sbar">
     <div class="sbox"><div class="snum">${t.pairs.length}</div><div class="slbl">Pairs</div></div>
     <div class="sbox"><div class="snum">${played}/${total}</div><div class="slbl">Matches</div></div>
     <div class="sbox"><div class="snum">${total-played}</div><div class="slbl">Remaining</div></div>
     <div class="sbox"><div class="snum">${t.hasFinal?(fDone?'Done✓':allDone?'Ready':'—'):'—'}</div><div class="slbl">Final</div></div>
   </div>`;
-
-  if(t.champion)
-    h+=`<div class="champ"><div class="champ-t">🏆</div><div class="champ-l">Tournament Champion</div><div class="champ-n">${t.champion.name}</div></div>`;
-
+  if(t.champion) h+=`<div class="champ"><div class="champ-t">🏆</div><div class="champ-l">Champion</div><div class="champ-n">${t.champion.name}</div></div>`;
   h+=`<div class="card"><div class="ctitle">Standings</div>`;
-  if(allDone&&t.hasFinal&&!fDone) h+=`<div class="qnote">★ All matches done — Top 2 qualify for the Final!</div>`;
+  if(allDone&&t.hasFinal&&!fDone) h+=`<div class="qnote">★ Top 2 qualify for the Final!</div>`;
   h+=`<div class="tbl-wrap"><table><tr><th>#</th><th>Pair</th><th>P</th><th>W</th><th>L</th><th>Pts</th><th>Games</th></tr>`;
   t.standings.forEach((s,i)=>{
-    const q=i<2&&allDone&&t.hasFinal, top=i===0&&!t.hasFinal&&allDone;
+    const q=i<2&&allDone&&t.hasFinal,top=i===0&&!t.hasFinal&&allDone;
     h+=`<tr${q||top?' class="qualify"':''}><td><span class="posbadge${q||top?' top':''}">${i+1}</span></td>
-      <td style="font-weight:${q||top?'700':'400'}">${s.name}${q?` <small style="color:var(--grn)">★ Final</small>`:''}${top?` <small>🏆</small>`:''}</td>
+      <td style="font-weight:${q||top?700:400}">${s.name}${q?` <small style="color:var(--grn)">★</small>`:''}${top?` <small>🏆</small>`:''}</td>
       <td>${s.played}</td><td>${s.w}</td><td>${s.l}</td>
       <td style="font-weight:700;color:var(--saf2)">${s.pts}</td><td>${s.gw}–${s.gl}</td></tr>`;
   });
   h+=`</table></div></div>`;
-
   h+=`<div class="card"><div class="ctitle">All ${total} Matches <small style="font-size:11px;font-weight:400;color:var(--tx2);font-family:var(--fb);text-transform:none;letter-spacing:0"> — click team or badge to record/edit</small></div><div class="schedule">`;
   t.matches.forEach((m,mi)=>{
     const d=m.done,w1=d&&m.winner&&m.winner.id===m.t1.id,w2=d&&m.winner&&m.winner.id===m.t2.id;
     const sc=d?(m.scores||[]).map(g=>`${g[0]}–${g[1]}`).join(' | '):'';
-    h+=`<div class="mrow${d?' done':''}">
-      <span class="mnum">M${mi+1}</span>
+    h+=`<div class="mrow${d?' done':''}"><span class="mnum">M${mi+1}</span>
       <div class="mteams">
         <span class="mteam${w1?' wt':d?' lt':''}" onclick="openModal('${m.id}',0)">${m.t1.name}</span>
         <span class="mvs">VS</span>
@@ -835,88 +939,54 @@ function renderLeague(t){
     </div>`;
   });
   h+=`</div></div>`;
-
   if(t.hasFinal&&allDone&&t.final){
     const f=t.final,fw1=f.done&&f.winner&&f.winner.id===f.t1.id,fw2=f.done&&f.winner&&f.winner.id===f.t2.id;
     const fsc=f.done?(f.scores||[]).map(g=>`${g[0]}–${g[1]}`).join(' | '):'';
-    h+=`<div class="divider"></div>
-    <div style="font-family:var(--fd);font-size:22px;letter-spacing:1px;margin-bottom:13px;color:var(--saf2)">🏆 THE FINAL — Best of 3</div>
-    <div class="final-wrap">
-      <div class="fmatch">
-        <div class="fteam${fw1?' fw':f.done?' fl':''}" onclick="openModal('final',0)">
-          <div class="fteam-name">${f.t1.name}</div><div class="fteam-sc">${f.done?fsc:'Click to record'}</div>
-        </div>
-        <div class="fvs">VS</div>
-        <div class="fteam${fw2?' fw':f.done?' fl':''}" onclick="openModal('final',1)">
-          <div class="fteam-name">${f.t2.name}</div><div class="fteam-sc">${f.done?fsc:'Click to record'}</div>
-        </div>
-      </div>
-      <p style="text-align:center;font-size:12px;color:var(--tx2);margin-top:9px">${f.done?'Click either team to edit':'Click a team to record the Final'}</p>
-    </div>`;
+    h+=`<div class="divider"></div><div class="playoff-title">🏆 THE FINAL — Best of 3</div>
+    <div class="final-wrap"><div class="fmatch">
+      <div class="fteam${fw1?' fw':f.done?' fl':''}" onclick="openModal('final',0)"><div class="fteam-name">${f.t1.name}</div><div class="fteam-sc">${f.done?fsc:'Click to record'}</div></div>
+      <div class="fvs">VS</div>
+      <div class="fteam${fw2?' fw':f.done?' fl':''}" onclick="openModal('final',1)"><div class="fteam-name">${f.t2.name}</div><div class="fteam-sc">${f.done?fsc:'Click to record'}</div></div>
+    </div><p style="text-align:center;font-size:12px;color:var(--tx2);margin-top:9px">${f.done?'Click either team to edit':'Click a team to record the Final'}</p></div>`;
   }
   document.getElementById('matchContent').innerHTML=h;
 }
 
-/* ── PURE KNOCKOUT ── */
 function renderKO(t){
   rebuildKOStandings(t);
-  const played=t.matches.filter(m=>m.done).length;
-  const total=t.matches.length;
-  const allGroupDone=t.matches.every(m=>m.done);
-  const n=t.pairs.length;
-
-  let h=`
-  <div class="sechdr">
-    <div><h2>${t.name}</h2>
-      <p>Pure Knockout · ${n} pairs · Group stage (single game each) → ${n>=5?'Semi-final + ':''}Final</p>
-    </div>
-    <div class="sechdr-actions"><button class="btn btn-sm btn-red" onclick="resetT()">Reset</button></div>
-  </div>
-  <div class="infobox">
-    🏸 <strong>Pure Knockout:</strong> Every pair plays every other pair once (single game).
-    ${n>=5
-      ? `Top 3 qualify — 2nd vs 3rd in a Semi-final, winner faces 1st place in the Final.`
-      : `Top 2 by wins go straight to the Final.`}
-    Click any team name or badge to record a result.
-  </div>
+  const played=t.matches.filter(m=>m.done).length,total=t.matches.length;
+  const allDone=t.matches.every(m=>m.done),n=t.pairs.length;
+  let h=`<div class="sechdr"><div><h2>${t.name}</h2>
+    <p>Pure Knockout · ${n} pairs · Group (1 game each) → ${n>=5?'Semi + ':''}Final</p></div>
+    <div class="sechdr-actions"><button class="btn btn-sm btn-red" onclick="resetT()">Reset</button></div></div>
+  <div class="infobox">🏸 Every pair plays each other once (single game). ${n>=5?`Top 3 qualify: 2nd vs 3rd in Semi-final, winner faces 1st in Final.`:`Top 2 by wins go to the Final.`}</div>
   <div class="sbar">
     <div class="sbox"><div class="snum">${n}</div><div class="slbl">Pairs</div></div>
     <div class="sbox"><div class="snum">${played}/${total}</div><div class="slbl">Group</div></div>
     <div class="sbox"><div class="snum">${total-played}</div><div class="slbl">Remaining</div></div>
-    <div class="sbox"><div class="snum">${t.champion?'Done':allGroupDone?'Playoffs':'Group'}</div><div class="slbl">Stage</div></div>
+    <div class="sbox"><div class="snum">${t.champion?'Done✓':allDone?'Playoffs':'Group'}</div><div class="slbl">Stage</div></div>
   </div>`;
+  if(t.champion) h+=`<div class="champ"><div class="champ-t">🏆</div><div class="champ-l">Champion</div><div class="champ-n">${t.champion.name}</div></div>`;
 
-  if(t.champion)
-    h+=`<div class="champ"><div class="champ-t">🏆</div><div class="champ-l">Tournament Champion</div><div class="champ-n">${t.champion.name}</div></div>`;
-
-  // Standings
   h+=`<div class="card"><div class="ctitle">Group Standings</div>`;
-  if(allGroupDone){
-    const q=n>=5?3:2;
-    h+=`<div class="qnote">★ Group stage complete — Top ${q} advance to playoffs!</div>`;
-  }
-  h+=`<div class="tbl-wrap"><table><tr><th>#</th><th>Pair</th><th>P</th><th>W</th><th>L</th><th>Pts</th><th>Points +/–</th></tr>`;
-  const qualN=n>=5?3:2;
+  if(allDone) h+=`<div class="qnote">★ Group complete — Top ${n>=5?3:2} advance to playoffs!</div>`;
+  h+=`<div class="tbl-wrap"><table><tr><th>#</th><th>Pair</th><th>P</th><th>W</th><th>L</th><th>Pts</th><th>Score +/–</th></tr>`;
+  const qN=n>=5?3:2;
   t.standings.forEach((s,i)=>{
-    const q=i<qualN&&allGroupDone;
+    const q=i<qN&&allDone;
     h+=`<tr${q?' class="qualify"':''}><td><span class="posbadge${q?' top':''}">${i+1}</span></td>
-      <td style="font-weight:${q?'700':'400'}">${s.name}${q?` <small style="color:var(--grn)">★</small>`:''}</td>
+      <td style="font-weight:${q?700:400}">${s.name}${q?` <small style="color:var(--grn)">★</small>`:''}</td>
       <td>${s.played}</td><td>${s.w}</td><td>${s.l}</td>
       <td style="font-weight:700;color:var(--saf2)">${s.pts}</td>
-      <td>${s.gw>0||s.gl>0?`${s.gw}–${s.gl}`:'—'}</td></tr>`;
+      <td>${s.gw||s.gl?`${s.gw}–${s.gl}`:'—'}</td></tr>`;
   });
   h+=`</table></div></div>`;
 
-  // Group matches — single game
-  h+=`<div class="card"><div class="ctitle">Group Matches <small style="font-size:11px;font-weight:400;color:var(--tx2);font-family:var(--fb);text-transform:none;letter-spacing:0"> — single game each, click to record</small></div>`;
-
-  // Group by rounds (round-robin scheduling)
-  h+=`<div class="schedule">`;
+  h+=`<div class="card"><div class="ctitle">Group Matches <small style="font-size:11px;font-weight:400;color:var(--tx2);font-family:var(--fb);text-transform:none;letter-spacing:0"> — single game each, click to record/edit</small></div><div class="schedule">`;
   t.matches.forEach((m,mi)=>{
     const d=m.done,w1=d&&m.winner&&m.winner.id===m.t1.id,w2=d&&m.winner&&m.winner.id===m.t2.id;
     const sc=d?(m.scores||[]).map(g=>`${g[0]}–${g[1]}`).join(' | '):'';
-    h+=`<div class="mrow${d?' done':''}">
-      <span class="mnum">G${mi+1}</span>
+    h+=`<div class="mrow${d?' done':''}"><span class="mnum">G${mi+1}</span>
       <div class="mteams">
         <span class="mteam${w1?' wt':d?' lt':''}" onclick="openModal('${m.id}',0)">${m.t1.name}</span>
         <span class="mvs">VS</span>
@@ -928,94 +998,65 @@ function renderKO(t){
   });
   h+=`</div></div>`;
 
-  // Playoffs — only shown after group stage done
-  if(allGroupDone){
-    h+=`<div class="playoff-section">`;
-
-    // Semi-final (only for 5+ pairs)
-    if(n>=5){
-      h+=`<div class="playoff-title">⚔ Semi-final — 2nd vs 3rd</div>`;
-      if(t.semi){
-        const sf=t.semi;
-        const sw1=sf.done&&sf.winner&&sf.winner.id===sf.t1.id;
-        const sw2=sf.done&&sf.winner&&sf.winner.id===sf.t2.id;
-        const ssc=sf.done?(sf.scores||[]).map(g=>`${g[0]}–${g[1]}`).join(' | '):'';
-        h+=`<div class="schedule" style="margin-bottom:20px">
-          <div class="mrow${sf.done?' done':''}">
-            <span class="mnum">SF</span>
-            <div class="mteams">
-              <span class="mteam${sw1?' wt':sf.done?' lt':''}" onclick="openModal('semi',0)">${sf.t1.name} <small style="font-size:10px;color:var(--tx3)">(2nd)</small></span>
-              <span class="mvs">VS</span>
-              <span class="mteam${sw2?' wt':sf.done?' lt':''}" onclick="openModal('semi',1)">${sf.t2.name} <small style="font-size:10px;color:var(--tx3)">(3rd)</small></span>
-            </div>
-            ${ssc?`<span class="mscore">${ssc}</span>`:''}
-            <span class="mbadge ${sf.done?'mb-done':'mb-pend'}" onclick="openModal('semi',0)">${sf.done?'Done ✏':'Pending'}</span>
+  if(allDone){
+    if(n>=5&&t.semi){
+      const sf=t.semi,sw1=sf.done&&sf.winner&&sf.winner.id===sf.t1.id,sw2=sf.done&&sf.winner&&sf.winner.id===sf.t2.id;
+      const ssc=sf.done?(sf.scores||[]).map(g=>`${g[0]}–${g[1]}`).join(' | '):'';
+      h+=`<div class="playoff-title">⚔ Semi-final — 2nd vs 3rd Place</div>
+      <div class="schedule" style="margin-bottom:20px">
+        <div class="mrow${sf.done?' done':''}"><span class="mnum">SF</span>
+          <div class="mteams">
+            <span class="mteam${sw1?' wt':sf.done?' lt':''}" onclick="openModal('semi',0)">${sf.t1.name} <small style="opacity:.6">(2nd)</small></span>
+            <span class="mvs">VS</span>
+            <span class="mteam${sw2?' wt':sf.done?' lt':''}" onclick="openModal('semi',1)">${sf.t2.name} <small style="opacity:.6">(3rd)</small></span>
           </div>
-        </div>`;
-      }
+          ${ssc?`<span class="mscore">${ssc}</span>`:''}
+          <span class="mbadge ${sf.done?'mb-done':'mb-pend'}" onclick="openModal('semi',0)">${sf.done?'Done ✏':'Pending'}</span>
+        </div>
+      </div>`;
     }
-
-    // Final
-    h+=`<div class="playoff-title">🏆 Final${n>=5?' — 1st vs Semi Winner':' — 1st vs 2nd'}</div>`;
     if(t.final){
       const f=t.final,fw1=f.done&&f.winner&&f.winner.id===f.t1.id,fw2=f.done&&f.winner&&f.winner.id===f.t2.id;
       const fsc=f.done?(f.scores||[]).map(g=>`${g[0]}–${g[1]}`).join(' | '):'';
-      h+=`<div class="final-wrap">
-        <div class="fmatch">
-          <div class="fteam${fw1?' fw':f.done?' fl':''}" onclick="openModal('final',0)">
-            <div class="fteam-name">${f.t1.name}</div><div class="fteam-sc">${f.done?fsc:'Click to record'}</div>
-          </div>
-          <div class="fvs">VS</div>
-          <div class="fteam${fw2?' fw':f.done?' fl':''}" onclick="openModal('final',1)">
-            <div class="fteam-name">${f.t2.name}</div><div class="fteam-sc">${f.done?fsc:'Click to record'}</div>
-          </div>
-        </div>
-        <p style="text-align:center;font-size:12px;color:var(--tx2);margin-top:9px">${f.done?'Click either team to edit the Final':'Click a team to record the Final result'}</p>
-      </div>`;
+      h+=`<div class="playoff-title">🏆 Final${n>=5?' — 1st vs Semi Winner':' — 1st vs 2nd'}</div>
+      <div class="final-wrap"><div class="fmatch">
+        <div class="fteam${fw1?' fw':f.done?' fl':''}" onclick="openModal('final',0)"><div class="fteam-name">${f.t1.name}</div><div class="fteam-sc">${f.done?fsc:'Click to record'}</div></div>
+        <div class="fvs">VS</div>
+        <div class="fteam${fw2?' fw':f.done?' fl':''}" onclick="openModal('final',1)"><div class="fteam-name">${f.t2.name}</div><div class="fteam-sc">${f.done?fsc:'Click to record'}</div></div>
+      </div><p style="text-align:center;font-size:12px;color:var(--tx2);margin-top:9px">${f.done?'Click either team to edit':'Click a team to record result'}</p></div>`;
     } else if(n>=5&&t.semi&&!t.semi.done){
-      h+=`<div class="infobox" style="text-align:center">⏳ Complete the Semi-final first — then the Final will appear here.</div>`;
+      h+=`<div class="infobox" style="text-align:center">⏳ Complete the Semi-final first, then the Final will appear here.</div>`;
     }
-
-    h+=`</div>`;
   }
-
   document.getElementById('matchContent').innerHTML=h;
 }
 
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 //  MODAL
-// ═══════════════════════════════════
-function openModal(mid, hint){
+// ══════════════════════════════════════════════
+function openModal(mid,hint){
   const t=activeT; if(!t) return;
-  const isFinal=mid==='final', isSemi=mid==='semi';
-
+  const isFinal=mid==='final',isSemi=mid==='semi';
   let m;
-  if(isFinal)     m=t.final;
+  if(isFinal) m=t.final;
   else if(isSemi) m=t.semi;
-  else if(t.type==='ko') m=t.matches.find(x=>x.id===mid);
   else m=t.matches.find(x=>x.id===mid);
   if(!m) return;
   currentMid=mid;
 
-  // KO group = single game; league = Bo3; semi/final always single game for KO
-  const isBo3=(t.type==='league'||(t.type!=='ko'&&(isFinal)));
-  // For KO type: group matches and semi = single game; only league Final = Bo3
-  const isKOFinal = t.type==='ko'&&(isFinal||isSemi);
-  const singleGame = t.type==='ko' || isKOFinal;
-
+  const isKO=t.type==='ko'; // all KO matches = single game; league = Bo3
   document.getElementById('mTitle').textContent=isFinal?'Record Final':isSemi?'Record Semi-final':'Record Match';
-  document.getElementById('mSub').textContent=(!singleGame&&t.type!=='ko')
-    ?'Best of 3: Enter G1 & G2. Fill G3 only if tied 1–1.'
-    :'Single game — enter the final score and save.';
+  document.getElementById('mSub').textContent=isKO
+    ?'Single game — enter the final score and save.'
+    :'Best of 3: Enter G1 & G2. Only fill G3 if tied 1–1 after 2 games.';
   document.getElementById('mT1').textContent=m.t1?m.t1.name:'—';
   document.getElementById('mT2').textContent=m.t2?m.t2.name:'—';
 
-  const t1n=m.t1?m.t1.name:'—', t2n=m.t2?m.t2.name:'—';
+  const t1n=m.t1?m.t1.name:'—',t2n=m.t2?m.t2.name:'—';
   const prev=m.done&&m.scores&&m.scores.length?m.scores:[];
   let body='';
 
-  if(singleGame || t.type==='ko'){
-    // Single game
+  if(isKO){
     const p=prev[0]||[0,0];
     body=`<div class="gblock"><div class="gbtitle">Game Score</div>
       <div class="score-row">
@@ -1026,12 +1067,10 @@ function openModal(mid, hint){
         <span class="score-team-label right">${t2n}</span>
       </div></div>`;
   } else {
-    // Best of 3 (league)
     const labels=['Game 1','Game 2','Game 3 (only if tied 1–1)'];
     for(let g=0;g<3;g++){
       const p=prev[g]||[0,0];
-      body+=`<div class="gblock${g===2?' g3':''}">
-        <div class="gbtitle">${labels[g]}</div>
+      body+=`<div class="gblock${g===2?' g3':''}"><div class="gbtitle">${labels[g]}</div>
         <div class="score-row">
           <span class="score-team-label">${t1n}</span>
           <input class="score-input" type="number" id="s${g}a" min="0" max="99" value="${p[0]}"/>
@@ -1046,27 +1085,24 @@ function openModal(mid, hint){
 }
 function closeModal(){ document.getElementById('overlay').classList.remove('open'); currentMid=null; }
 
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 //  SUBMIT SCORE
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 function submitScore(){
   if(!currentMid) return;
   const t=activeT;
-  const isFinal=currentMid==='final', isSemi=currentMid==='semi';
+  const isFinal=currentMid==='final',isSemi=currentMid==='semi';
   let m;
-  if(isFinal)     m=t.final;
+  if(isFinal) m=t.final;
   else if(isSemi) m=t.semi;
   else m=t.matches.find(x=>x.id===currentMid);
   if(!m) return;
 
-  const isBo3=(t.type==='league'&&!isFinal&&!isSemi)||((isFinal||isSemi)&&t.type!=='ko'&&t.hasFinal);
-  // KO type: ALL matches (group, semi, final) are single game
-  const singleGame = t.type==='ko';
-
   let scores=[],w0=0,w1=0;
 
-  if(singleGame||(!isBo3)){
-    const a=+document.getElementById('s0a').value, b=+document.getElementById('s0b').value;
+  if(t.type==='ko'){
+    // single game
+    const a=+document.getElementById('s0a').value,b=+document.getElementById('s0b').value;
     if(a===b){alert('Scores cannot be equal!');return;}
     scores.push([a,b]); if(a>b)w0++;else w1++;
   } else {
@@ -1086,27 +1122,20 @@ function submitScore(){
       if(games[2][0]===games[2][1]){alert('Game 3 cannot be equal!');return;}
       scores.push(games[2]); if(games[2][0]>games[2][1])w0++;else w1++;
     }
-    if(w0<2&&w1<2){alert('No winner yet — one team must win 2 games.');return;}
+    if(w0<2&&w1<2){alert('No winner — someone must win 2 games.');return;}
   }
 
   const winner=w0>w1?m.t1:m.t2;
   m.winner=winner; m.scores=scores; m.done=true;
-
-  if(t.type==='ko'){
-    checkKODone(t);
-  } else {
-    checkLeagueDone(t);
-  }
-
+  t.type==='ko'?checkKODone(t):checkLeagueDone(t);
   saveHistory(t);
-  showToast('✓ Result saved & synced to cloud');
-  closeModal();
-  renderMatches();
+  showToast('✓ Result saved'+(getCreds()?'& synced to cloud':''));
+  closeModal(); renderMatches();
 }
 
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 //  TOAST
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 let tTmr=null;
 function showToast(msg){
   const el=document.getElementById('toast');
@@ -1114,13 +1143,21 @@ function showToast(msg){
   clearTimeout(tTmr); tTmr=setTimeout(()=>el.classList.remove('show'),2800);
 }
 
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 //  HISTORY RENDER
-// ═══════════════════════════════════
+// ══════════════════════════════════════════════
 function renderHistory(){
   const hist=loadHist();
   const el=document.getElementById('histContent');
-  if(!hist.length){ el.innerHTML='<div class="nohist"><div class="icon">🏸</div><p>No tournaments yet.<br>Results auto-appear here for everyone.</p></div>'; return; }
+  const hasCreds=!!getCreds();
+  document.getElementById('histSubtitle').textContent=hasCreds
+    ?'Shared in real-time — all devices with same cloud credentials see these results'
+    :'Local only — set up Cloud to share with others (Cloud tab)';
+
+  if(!hist.length){
+    el.innerHTML='<div class="nohist"><div class="icon">🏸</div><p>No tournaments yet.<br>'+(hasCreds?'Results will appear here for all connected devices.':'Set up Cloud to share results, or add a tournament first.')+'</p></div>';
+    return;
+  }
 
   el.innerHTML=hist.map((t,i)=>{
     const date=new Date(t.ts).toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
@@ -1139,7 +1176,7 @@ function renderHistory(){
 
     const rows=matchList.map(m=>{
       const sc=(m.scores||[]).map(g=>`${g[0]}–${g[1]}`).join(' | ');
-      const w1=m.winner&&m.t1&&m.winner.id===m.t1.id, w2=m.winner&&m.t2&&m.winner.id===m.t2.id;
+      const w1=m.winner&&m.t1&&m.winner.id===m.t1.id,w2=m.winner&&m.t2&&m.winner.id===m.t2.id;
       return`<div class="mrow done" style="margin-bottom:5px">
         <span class="mnum" style="font-size:9px;min-width:55px;color:var(--tx3)">${m.phaseLbl}</span>
         <div class="mteams">
@@ -1157,20 +1194,22 @@ function renderHistory(){
       snap=`<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--bdr)">
         <div style="font-size:11px;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;font-family:var(--fh);font-weight:700">Standings</div>
         <div class="tbl-wrap"><table><tr><th>#</th><th>Pair</th><th>W</th><th>L</th><th>Pts</th></tr>
-        ${(t.standings||[]).map((s,si)=>`<tr><td>${si+1}</td><td>${s.name}</td><td>${s.w}</td><td>${s.l}</td><td style="font-weight:700;color:var(--saf2)">${s.pts}</td></tr>`).join('')}
+        ${t.standings.map((s,si)=>`<tr><td>${si+1}</td><td>${s.name}</td><td>${s.w}</td><td>${s.l}</td><td style="font-weight:700;color:var(--saf2)">${s.pts}</td></tr>`).join('')}
         </table></div></div>`;
     }
 
     return`<div class="histcard">
       <div class="histhead">
-        <div class="histhead-left" onclick="toggleHist(${i})"><h3>${t.name}</h3><div class="meta">${fmtLabel} · ${(t.pairs||[]).length} pairs · ${date}</div></div>
+        <div class="histhead-left" onclick="toggleHist(${i})">
+          <h3>${t.name}</h3><div class="meta">${fmtLabel} · ${(t.pairs||[]).length} pairs · ${date}</div>
+        </div>
         <div class="histhead-right">
           <span class="hist-champ">${champ}</span>
           <span style="color:var(--tx3);font-size:12px;cursor:pointer" id="arr_${i}" onclick="toggleHist(${i})">▼</span>
-          <button class="btn btn-sm btn-red btn-icon" onclick="deleteOneHistory(${t.ts})" title="Delete">🗑</button>
+          <button class="btn btn-sm btn-red btn-icon" onclick="deleteOneHistory(${t.ts})">🗑</button>
         </div>
       </div>
-      <div class="histbody" id="hb_${i}">${rows||'<p style="color:var(--tx3);font-size:13px;padding:4px 0">No matches recorded yet.</p>'}${snap}</div>
+      <div class="histbody" id="hb_${i}">${rows||'<p style="color:var(--tx3);font-size:13px;padding:4px 0">No matches yet.</p>'}${snap}</div>
     </div>`;
   }).join('');
 }
@@ -1180,9 +1219,6 @@ function toggleHist(i){
   b.style.display=open?'none':'block'; a.textContent=open?'▼':'▲';
 }
 
-// ═══════════════════════════════════
-//  RESET
-// ═══════════════════════════════════
 function resetT(){
   if(!confirm('Reset tournament? Progress stays in History.'))return;
   activeT=null;
@@ -1191,15 +1227,12 @@ function resetT(){
   goTab('setup');
 }
 
-// Close modals on backdrop
+// Close on backdrop
 document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal();});
 document.getElementById('puOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('puOverlay'))closePairUp();});
 
-// ═══════════════════════════════════
-//  INIT
-// ═══════════════════════════════════
-renderPairs(); renderHistory(); updatePreviews(); setFmt('league_ko');
-initCloud();
+// INIT
+renderPairs(); renderHistory(); updatePreviews(); setFmt('league_ko'); initCloud();
 </script>
 </body>
 </html>
